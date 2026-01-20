@@ -26,19 +26,6 @@
   </div>
 </div>
 
-<!-- Desktop floating quote button -->
-<div id="floating-cta-desktop" class="fixed bottom-8 right-8 z-50 hidden md:block opacity-0 translate-y-4 transition-all duration-300">
-  <a
-    href="/contact"
-    class="flex items-center gap-2 px-6 py-4 bg-gradient-to-r from-[var(--secondary)] to-[var(--secondary-dark)] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all floating-cta group"
-  >
-    <span>Get Free Quote</span>
-    <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-    </svg>
-  </a>
-</div>
-
 <style>
   /* Safe area for phones with home indicator */
   .safe-area-bottom {
@@ -46,35 +33,3 @@
   }
 </style>
 
-<script>
-  // Show desktop floating CTA after scrolling
-  const floatingCTADesktop = document.getElementById('floating-cta-desktop');
-
-  let ticking = false;
-
-  function updateFloatingCTA() {
-    const scrollY = window.scrollY;
-    const showThreshold = 400;
-
-    if (floatingCTADesktop) {
-      if (scrollY > showThreshold) {
-        floatingCTADesktop.classList.remove('opacity-0', 'translate-y-4');
-        floatingCTADesktop.classList.add('opacity-100', 'translate-y-0');
-      } else {
-        floatingCTADesktop.classList.add('opacity-0', 'translate-y-4');
-        floatingCTADesktop.classList.remove('opacity-100', 'translate-y-0');
-      }
-    }
-
-    ticking = false;
-  }
-
-  function onScroll() {
-    if (!ticking) {
-      window.requestAnimationFrame(updateFloatingCTA);
-      ticking = true;
-    }
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-</script>

@@ -2,13 +2,14 @@
 const currentYear = new Date().getFullYear();
 
 const services = [
+  { href: '/services#renovations', label: 'Full Home Renovations' },
+  { href: '/services#kitchens-bathrooms', label: 'Kitchen & Bathroom' },
   { href: '/services#masonry', label: 'Masonry & Stonework' },
-  { href: '/services#foundations', label: 'Foundations & Concrete' },
-  { href: '/services#renovations', label: 'Full Gut Renovations' },
-  { href: '/services#kitchens-bathrooms', label: 'Kitchens & Bathrooms' },
+  { href: '/services#exterior', label: 'Exterior & Stone Veneers' },
+  { href: '/services#foundations', label: 'Concrete & Foundations' },
   { href: '/services#epoxy', label: 'Epoxy Flooring' },
-  { href: '/services#exterior', label: 'Exterior Work' },
   { href: '/services#new-construction', label: 'New Construction' },
+  { href: '/services#maintenance', label: 'Maintenance & Repairs' },
 ];
 
 const quickLinks = [
@@ -41,8 +42,8 @@ const socialLinks = [
   <div class="container mx-auto px-4 py-10 md:py-16 lg:py-20">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
       <!-- Company Info -->
-      <div class="lg:col-span-1">
-        <div class="mb-6">
+      <div class="lg:col-span-1 text-center md:text-left">
+        <div class="mb-6 flex justify-center md:justify-start">
           <picture>
             <source srcset="/images/whiteheader.webp" type="image/webp" />
             <img
@@ -57,7 +58,7 @@ const socialLinks = [
         </p>
 
         <!-- Social Links -->
-        <div class="flex gap-3">
+        <div class="flex gap-3 justify-center md:justify-start">
           {socialLinks.map((social) => (
             <a
               href={social.href}
@@ -180,7 +181,7 @@ const socialLinks = [
 
   <!-- Bottom Bar -->
   <div class="border-t border-gray-800">
-    <div class="container mx-auto px-4 py-6">
+    <div class="container mx-auto px-4 py-6 pb-20 md:pb-6">
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
         <p class="text-sm text-gray-500 text-center md:text-left">
           &copy; {currentYear} JZ Development & Management LLC. All rights reserved.
