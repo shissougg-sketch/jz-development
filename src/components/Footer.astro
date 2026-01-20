@@ -38,7 +38,7 @@ const socialLinks = [
 
 <footer class="bg-gradient-to-b from-[var(--charcoal)] to-black text-gray-300">
   <!-- Main Footer -->
-  <div class="container mx-auto px-4 py-16 md:py-20">
+  <div class="container mx-auto px-4 py-10 md:py-16 lg:py-20">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
       <!-- Company Info -->
       <div class="lg:col-span-1">
@@ -90,11 +90,11 @@ const socialLinks = [
           <span class="w-8 h-0.5 bg-[var(--secondary)]"></span>
           Our Services
         </h3>
-        <ul class="space-y-3">
+        <ul class="grid grid-cols-2 md:grid-cols-1 gap-x-4 gap-y-2 md:gap-y-3">
           {services.map((service) => (
             <li>
-              <a href={service.href} class="text-sm text-gray-400 hover:text-[var(--secondary)] transition-colors flex items-center gap-2 group">
-                <svg class="w-3 h-3 text-[var(--secondary)] opacity-0 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <a href={service.href} class="text-sm text-gray-400 hover:text-[var(--secondary)] transition-colors flex items-center gap-1 md:gap-2 group">
+                <svg class="w-3 h-3 text-[var(--secondary)] opacity-0 group-hover:opacity-100 transition-opacity hidden md:block" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                 </svg>
                 <span class="group-hover:translate-x-1 transition-transform">{service.label}</span>
@@ -104,8 +104,8 @@ const socialLinks = [
         </ul>
       </div>
 
-      <!-- Quick Links -->
-      <div>
+      <!-- Quick Links - Hidden on mobile since there's a menu at top -->
+      <div class="hidden md:block">
         <h3 class="text-white font-bold text-lg mb-5 flex items-center gap-2">
           <span class="w-8 h-0.5 bg-[var(--secondary)]"></span>
           Quick Links
