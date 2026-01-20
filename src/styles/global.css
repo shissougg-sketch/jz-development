@@ -305,3 +305,8 @@ select:focus-visible {
   background-color: var(--accent-gold);
   color: var(--charcoal);
 }
+
+/* Section title with subtle orange shadow */
+.section-title {
+  text-shadow: 2px 2px 0 rgba(249, 115, 22, 0.15);
+}
