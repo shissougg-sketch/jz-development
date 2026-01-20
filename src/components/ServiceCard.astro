@@ -10,35 +10,46 @@ interface Props {
 
 const { title, description, href, icon = 'hammer', image, compact = false } = Astro.props;
 
-// Stock images for each service type
-const stockImages: Record<string, string> = {
-  brick: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80',
-  foundation: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80',
-  renovation: 'https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=600&q=80',
-  kitchen: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=600&q=80',
-  epoxy: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?auto=format&fit=crop&w=600&q=80',
-  exterior: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
-  construction: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80',
-  waterproofing: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80',
-  maintenance: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80',
-  hammer: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80'
+// Local service images mapped to icon types
+const serviceImages: Record<string, { webp: string; png: string }> = {
+  renovation: { webp: '/images/Services/one.webp', png: '/images/Services/one.png' },
+  kitchen: { webp: '/images/Services/two.webp', png: '/images/Services/two.png' },
+  brick: { webp: '/images/Services/three.webp', png: '/images/Services/three.png' },
+  exterior: { webp: '/images/Services/four.webp', png: '/images/Services/four.png' },
+  foundation: { webp: '/images/Services/five.webp', png: '/images/Services/five.png' },
+  epoxy: { webp: '/images/Services/six.webp', png: '/images/Services/six.png' },
+  construction: { webp: '/images/Services/seven.webp', png: '/images/Services/seven.png' },
+  maintenance: { webp: '/images/Services/eight.webp', png: '/images/Services/eight.png' },
 };
 
-const imageUrl = image || stockImages[icon] || stockImages.hammer;
+// Get image paths - use provided image or fall back to service images
+const getImagePaths = () => {
+  if (image) {
+    // If image is provided, derive PNG fallback from WebP path
+    const pngPath = image.replace('.webp', '.png');
+    return { webp: image, png: pngPath };
+  }
+  return serviceImages[icon] || serviceImages.renovation;
+};
+
+const imagePaths = getImagePaths();
 ---
 
 {compact ? (
   <!-- Compact card style (matches featured projects) -->
   <a
     href={href}
-    class="group relative aspect-square rounded-xl overflow-hidden shadow-lg card-hover block"
+    class="group relative aspect-square rounded-xl overflow-hidden shadow-lg card-hover card-glow block"
   >
-    <img
-      src={imageUrl}
-      alt={title}
-      class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-      loading="lazy"
-    />
+    <picture>
+      <source srcset={imagePaths.webp} type="image/webp" />
+      <img
+        src={imagePaths.png}
+        alt={title}
+        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+        loading="lazy"
+      />
+    </picture>
     <!-- Gradient overlay -->
     <div class="absolute inset-0 bg-gradient-to-t from-[var(--charcoal)] via-[var(--charcoal)]/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
     <!-- Content always visible -->
@@ -56,16 +67,19 @@ const imageUrl = image || stockImages[icon] || stockImages.hammer;
   <!-- Full card style -->
   <a
     href={href}
-    class="group block bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[var(--secondary)] card-hover"
+    class="group block bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[var(--secondary)] card-hover card-glow"
   >
     <!-- Image with overlay -->
     <div class="relative aspect-video overflow-hidden">
-      <img
-        src={imageUrl}
-        alt={title}
-        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-        loading="lazy"
-      />
+      <picture>
+        <source srcset={imagePaths.webp} type="image/webp" />
+        <img
+          src={imagePaths.png}
+          alt={title}
+          class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+          loading="lazy"
+        />
+      </picture>
       <!-- Gradient overlay -->
       <div class="absolute inset-0 bg-gradient-to-t from-[var(--charcoal)]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       <!-- Icon badge -->

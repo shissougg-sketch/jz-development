@@ -12,49 +12,57 @@ const services = [
     title: "Full Home Renovations",
     description: "Complete interior and exterior renovations, from demolition to final finishes.",
     href: "/services#renovations",
-    icon: "renovation"
+    icon: "renovation",
+    image: "/images/Services/one.webp"
   },
   {
     title: "Kitchen & Bathroom Remodeling",
     description: "Custom kitchens and bathrooms designed for function, comfort, and long-term value.",
     href: "/services#kitchens-bathrooms",
-    icon: "kitchen"
+    icon: "kitchen",
+    image: "/images/Services/two.webp"
   },
   {
     title: "Masonry & Stonework",
     description: "Expert brick, block, and stone craftsmanship for structural and decorative projects.",
     href: "/services#masonry",
-    icon: "brick"
+    icon: "brick",
+    image: "/images/Services/three.webp"
   },
   {
     title: "Exterior Improvements & Stone Veneers",
     description: "Exterior upgrades including stone veneers, facades, walkways, and entry features.",
     href: "/services#exterior",
-    icon: "exterior"
+    icon: "exterior",
+    image: "/images/Services/four.webp"
   },
   {
     title: "Concrete & Foundations",
     description: "Foundations, slabs, footings, and structural concrete work done right the first time.",
     href: "/services#foundations",
-    icon: "foundation"
+    icon: "foundation",
+    image: "/images/Services/five.webp"
   },
   {
     title: "Epoxy Flooring",
     description: "Durable, seamless epoxy flooring for garages, basements, and utility spaces.",
     href: "/services#epoxy",
-    icon: "epoxy"
+    icon: "epoxy",
+    image: "/images/Services/six.webp"
   },
   {
     title: "New Construction",
     description: "Complete new home construction from foundation to finish.",
     href: "/services#new-construction",
-    icon: "construction"
+    icon: "construction",
+    image: "/images/Services/seven.webp"
   },
   {
     title: "Property Maintenance & Structural Repairs",
     description: "Repairs, structural fixes, and maintenance for long-term property care.",
     href: "/services#maintenance",
-    icon: "maintenance"
+    icon: "maintenance",
+    image: "/images/Services/eight.webp"
   }
 ];
 
@@ -116,13 +124,16 @@ const featuredProjects = [
 
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
         {services.map((service) => (
-          <ServiceCard
-            title={service.title}
-            description={service.description}
-            href={service.href}
-            icon={service.icon}
-            compact={true}
-          />
+          <div class="service-grid-item">
+            <ServiceCard
+              title={service.title}
+              description={service.description}
+              href={service.href}
+              icon={service.icon}
+              image={service.image}
+              compact={true}
+            />
+          </div>
         ))}
       </div>
 

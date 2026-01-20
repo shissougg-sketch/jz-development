@@ -43,11 +43,14 @@ const socialLinks = [
       <!-- Company Info -->
       <div class="lg:col-span-1">
         <div class="mb-6">
-          <img
-            src="/images/colorheader.png"
-            alt="JZ Development & Property Management"
-            class="h-10 md:h-12 w-auto brightness-0 invert"
-          />
+          <picture>
+            <source srcset="/images/whiteheader.webp" type="image/webp" />
+            <img
+              src="/images/whiteheader.png"
+              alt="JZ Development & Property Management"
+              class="h-10 md:h-12 w-auto"
+            />
+          </picture>
         </div>
         <p class="text-sm text-gray-400 mb-6 leading-relaxed">
           Quality craftsmanship and reliable service for all your construction needs on Long Island. Licensed, insured, and committed to excellence.
@@ -86,9 +89,9 @@ const socialLinks = [
 
       <!-- Services -->
       <div>
-        <h3 class="text-white font-bold text-lg mb-5 flex items-center gap-2">
+        <h3 class="font-bold text-lg mb-5 flex items-center gap-2">
           <span class="w-8 h-0.5 bg-[var(--secondary)]"></span>
-          Our Services
+          <span class="text-white">Our Services</span>
         </h3>
         <ul class="grid grid-cols-2 md:grid-cols-1 gap-x-4 gap-y-2 md:gap-y-3">
           {services.map((service) => (
@@ -106,9 +109,9 @@ const socialLinks = [
 
       <!-- Quick Links - Hidden on mobile since there's a menu at top -->
       <div class="hidden md:block">
-        <h3 class="text-white font-bold text-lg mb-5 flex items-center gap-2">
+        <h3 class="font-bold text-lg mb-5 flex items-center gap-2">
           <span class="w-8 h-0.5 bg-[var(--secondary)]"></span>
-          Quick Links
+          <span class="text-white">Quick Links</span>
         </h3>
         <ul class="space-y-3">
           {quickLinks.map((link) => (
@@ -126,9 +129,9 @@ const socialLinks = [
 
       <!-- Contact Info -->
       <div>
-        <h3 class="text-white font-bold text-lg mb-5 flex items-center gap-2">
+        <h3 class="font-bold text-lg mb-5 flex items-center gap-2">
           <span class="w-8 h-0.5 bg-[var(--secondary)]"></span>
-          Contact Us
+          <span class="text-white">Contact Us</span>
         </h3>
         <ul class="space-y-4">
           <li>

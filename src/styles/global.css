@@ -306,9 +306,9 @@ select:focus-visible {
   color: var(--charcoal);
 }
 
-/* Section title with subtle orange shadow */
+/* Section title with subtle blue shadow */
 .section-title {
-  text-shadow: 2px 2px 0 rgba(249, 115, 22, 0.15);
+  text-shadow: 2px 2px 0 rgba(30, 58, 95, 0.15);
 }
 
 /* Service Explorer Tab Styles */
@@ -343,3 +343,92 @@ select:focus-visible {
 .service-accordion[open] {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
+
+/* Enhanced card glow effect on hover */
+.card-glow {
+  transition: box-shadow 0.3s ease;
+}
+
+.card-glow:hover {
+  box-shadow: 0 20px 40px -10px rgba(249, 115, 22, 0.2),
+              0 10px 20px -5px rgba(0, 0, 0, 0.15);
+}
+
+/* Image loading shimmer animation */
+.image-loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Image fade-in on load */
+.image-fade-in {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.image-fade-in.loaded {
+  opacity: 1;
+}
+
+/* Service image container styles */
+.service-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-image-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 60%,
+    rgba(30, 58, 95, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+.service-image-container img {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-image-container:hover img {
+  transform: scale(1.05);
+}
+
+/* Stagger animation for service grid */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-grid-item {
+  animation: slideUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+.service-grid-item:nth-child(1) { animation-delay: 0.05s; }
+.service-grid-item:nth-child(2) { animation-delay: 0.1s; }
+.service-grid-item:nth-child(3) { animation-delay: 0.15s; }
+.service-grid-item:nth-child(4) { animation-delay: 0.2s; }
+.service-grid-item:nth-child(5) { animation-delay: 0.25s; }
+.service-grid-item:nth-child(6) { animation-delay: 0.3s; }
+.service-grid-item:nth-child(7) { animation-delay: 0.35s; }
+.service-grid-item:nth-child(8) { animation-delay: 0.4s; }

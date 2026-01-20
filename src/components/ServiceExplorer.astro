@@ -15,19 +15,25 @@ interface Props {
 
 const { services } = Astro.props;
 
-// Stock images for services (fallback)
-const stockImages: Record<string, string> = {
-  brick: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80',
-  foundation: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80',
-  renovation: 'https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=800&q=80',
-  kitchen: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80',
-  epoxy: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?auto=format&fit=crop&w=800&q=80',
-  exterior: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
-  construction: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80',
-  maintenance: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80',
+// Local service images mapped to icon types
+const serviceImages: Record<string, { webp: string; png: string }> = {
+  renovation: { webp: '/images/Services/one.webp', png: '/images/Services/one.png' },
+  kitchen: { webp: '/images/Services/two.webp', png: '/images/Services/two.png' },
+  brick: { webp: '/images/Services/three.webp', png: '/images/Services/three.png' },
+  exterior: { webp: '/images/Services/four.webp', png: '/images/Services/four.png' },
+  foundation: { webp: '/images/Services/five.webp', png: '/images/Services/five.png' },
+  epoxy: { webp: '/images/Services/six.webp', png: '/images/Services/six.png' },
+  construction: { webp: '/images/Services/seven.webp', png: '/images/Services/seven.png' },
+  maintenance: { webp: '/images/Services/eight.webp', png: '/images/Services/eight.png' },
 };
 
-const getServiceImage = (service: Service) => service.image || stockImages[service.icon] || stockImages.renovation;
+const getServiceImagePaths = (service: Service) => {
+  if (service.image) {
+    const pngPath = service.image.replace('.webp', '.png');
+    return { webp: service.image, png: pngPath };
+  }
+  return serviceImages[service.icon] || serviceImages.renovation;
+};
 ---
 
 <!-- Desktop: Vertical tabs on left, content on right -->
@@ -59,13 +65,16 @@ const getServiceImage = (service: Service) => service.image || stockImages[servi
         class={`service-panel ${index === 0 ? '' : 'hidden'}`}
       >
         <!-- Service Image -->
-        <div class="aspect-video md:aspect-[16/9] rounded-xl overflow-hidden mb-8 shadow-lg">
-          <img
-            src={getServiceImage(service)}
-            alt={service.title}
-            class="w-full h-full object-cover"
-            loading={index === 0 ? "eager" : "lazy"}
-          />
+        <div class="aspect-video md:aspect-[16/9] rounded-xl overflow-hidden mb-8 shadow-lg service-image-container">
+          <picture>
+            <source srcset={getServiceImagePaths(service).webp} type="image/webp" />
+            <img
+              src={getServiceImagePaths(service).png}
+              alt={service.title}
+              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          </picture>
         </div>
 
         <!-- Service Content -->
@@ -140,13 +149,16 @@ const getServiceImage = (service: Service) => service.image || stockImages[servi
         class={`service-panel-md ${index === 0 ? '' : 'hidden'}`}
       >
         <!-- Service Image -->
-        <div class="aspect-video rounded-xl overflow-hidden mb-6 shadow-lg">
-          <img
-            src={getServiceImage(service)}
-            alt={service.title}
-            class="w-full h-full object-cover"
-            loading={index === 0 ? "eager" : "lazy"}
-          />
+        <div class="aspect-video rounded-xl overflow-hidden mb-6 shadow-lg service-image-container">
+          <picture>
+            <source srcset={getServiceImagePaths(service).webp} type="image/webp" />
+            <img
+              src={getServiceImagePaths(service).png}
+              alt={service.title}
+              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          </picture>
         </div>
 
         <!-- Service Content -->
@@ -207,13 +219,16 @@ const getServiceImage = (service: Service) => service.image || stockImages[servi
 
       <div class="px-4 pb-4 border-t border-gray-100">
         <!-- Service Image -->
-        <div class="aspect-video rounded-lg overflow-hidden my-4 shadow">
-          <img
-            src={getServiceImage(service)}
-            alt={service.title}
-            class="w-full h-full object-cover"
-            loading="lazy"
-          />
+        <div class="aspect-video rounded-lg overflow-hidden my-4 shadow service-image-container">
+          <picture>
+            <source srcset={getServiceImagePaths(service).webp} type="image/webp" />
+            <img
+              src={getServiceImagePaths(service).png}
+              alt={service.title}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </picture>
         </div>
 
         <!-- Service Content -->
