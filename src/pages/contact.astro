@@ -75,6 +75,7 @@ const budgetRanges = [
                     id="name"
                     name="name"
                     required
+                    minlength="2"
                     placeholder="John Smith"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition"
                   />
@@ -89,6 +90,8 @@ const budgetRanges = [
                     name="phone"
                     required
                     placeholder="(631) 555-1234"
+                    pattern="[\d\s\-\(\)\+]+"
+                    title="Please enter a valid phone number"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition"
                   />
                 </div>
@@ -167,6 +170,7 @@ const budgetRanges = [
                   name="description"
                   rows="4"
                   required
+                  minlength="20"
                   placeholder="Please describe your project, including any specific requirements or questions..."
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition resize-none"
                 ></textarea>
