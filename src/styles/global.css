@@ -181,12 +181,12 @@ select:focus-visible {
 
 /* Section Spacing */
 .section {
-  padding: 4rem 1rem;
+  padding: 3rem 1rem;
 }
 
 @media (min-width: 768px) {
   .section {
-    padding: 6rem 2rem;
+    padding: 4rem 2rem;
   }
 }
 

@@ -5,9 +5,10 @@ interface Props {
   href: string;
   icon?: string;
   image?: string;
+  compact?: boolean;
 }
 
-const { title, description, href, icon = 'hammer', image } = Astro.props;
+const { title, description, href, icon = 'hammer', image, compact = false } = Astro.props;
 
 // Stock images for each service type
 const stockImages: Record<string, string> = {
@@ -25,12 +26,12 @@ const stockImages: Record<string, string> = {
 const imageUrl = image || stockImages[icon] || stockImages.hammer;
 ---
 
-<a
-  href={href}
-  class="group block bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[var(--secondary)] card-hover"
->
-  <!-- Image with overlay -->
-  <div class="relative aspect-video overflow-hidden">
+{compact ? (
+  <!-- Compact card style (matches featured projects) -->
+  <a
+    href={href}
+    class="group relative aspect-square rounded-xl overflow-hidden shadow-lg card-hover block"
+  >
     <img
       src={imageUrl}
       alt={title}
@@ -38,9 +39,36 @@ const imageUrl = image || stockImages[icon] || stockImages.hammer;
       loading="lazy"
     />
     <!-- Gradient overlay -->
-    <div class="absolute inset-0 bg-gradient-to-t from-[var(--charcoal)]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-    <!-- Icon badge -->
-    <div class="absolute top-4 right-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+    <div class="absolute inset-0 bg-gradient-to-t from-[var(--charcoal)] via-[var(--charcoal)]/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+    <!-- Content always visible -->
+    <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4">
+      <p class="text-white font-bold text-sm md:text-base leading-tight">{title}</p>
+    </div>
+    <!-- Learn more indicator on hover -->
+    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <span class="px-3 py-1.5 md:px-4 md:py-2 bg-[var(--secondary)] text-white text-sm font-semibold rounded-lg transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+        Learn More
+      </span>
+    </div>
+  </a>
+) : (
+  <!-- Full card style -->
+  <a
+    href={href}
+    class="group block bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[var(--secondary)] card-hover"
+  >
+    <!-- Image with overlay -->
+    <div class="relative aspect-video overflow-hidden">
+      <img
+        src={imageUrl}
+        alt={title}
+        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+        loading="lazy"
+      />
+      <!-- Gradient overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-[var(--charcoal)]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <!-- Icon badge -->
+      <div class="absolute top-4 right-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
       {icon === 'hammer' && (
         <svg class="w-6 h-6 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
@@ -103,4 +131,5 @@ const imageUrl = image || stockImages[icon] || stockImages.hammer;
       </svg>
     </span>
   </div>
-</a>
+  </a>
+)}
