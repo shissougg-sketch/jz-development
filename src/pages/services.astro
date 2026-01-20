@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import CTASection from '../components/CTASection.astro';
+
+interface Service {
+  id: string;
+  title: string;
+  description: string[];
+  projectTypes: string[];
+  icon: string;
+}
+
+const services: Service[] = [
+  {
+    id: "masonry",
+    title: "Masonry, Stonework & Veneers",
+    description: [
+      "Our expert masonry team delivers stunning brick, stone, and veneer installations that enhance both the beauty and value of your property. Whether you're looking to add a classic brick facade, install natural stone accents, or update your home with modern manufactured stone veneers, we have the skills and experience to bring your vision to life.",
+      "We work with a wide variety of materials including natural stone, brick, concrete block, and premium manufactured veneers. Every project is completed with meticulous attention to detail, ensuring lasting durability and timeless appeal."
+    ],
+    projectTypes: [
+      "Brick & stone facades",
+      "Retaining walls",
+      "Outdoor fireplaces & fire pits",
+      "Stone veneer installation",
+      "Chimney repair & rebuilding",
+      "Paver patios & walkways",
+      "Stone steps & landings"
+    ],
+    icon: "brick"
+  },
+  {
+    id: "foundations",
+    title: "Foundations & Concrete",
+    description: [
+      "A strong foundation is the cornerstone of any successful construction project. Our team specializes in all aspects of foundation work and concrete construction, from new pours to repairs and reinforcement.",
+      "We handle residential and commercial concrete projects of all sizes, using quality materials and proven techniques to ensure your foundation will stand the test of time. Our experienced crews deliver clean, professional results on every job."
+    ],
+    projectTypes: [
+      "New foundation construction",
+      "Foundation repair & waterproofing",
+      "Concrete slabs & footings",
+      "Driveways & sidewalks",
+      "Basement floor replacement",
+      "Concrete steps & porches",
+      "Decorative stamped concrete"
+    ],
+    icon: "foundation"
+  },
+  {
+    id: "renovations",
+    title: "Full Gut Renovations",
+    description: [
+      "Transform your outdated space into the home of your dreams with our comprehensive gut renovation services. We handle complete interior transformations from demolition through final finishes, managing every detail of your project.",
+      "Our renovation team coordinates all trades and ensures seamless execution, keeping your project on track and on budget. Whether you're updating a single room or renovating an entire home, we deliver quality craftsmanship at every stage."
+    ],
+    projectTypes: [
+      "Whole-house renovations",
+      "Single-room transformations",
+      "Open concept conversions",
+      "Basement finishing",
+      "Attic conversions",
+      "Historic home restoration",
+      "Structural modifications"
+    ],
+    icon: "renovation"
+  },
+  {
+    id: "kitchens-bathrooms",
+    title: "Kitchen & Bathroom Remodeling",
+    description: [
+      "Kitchens and bathrooms are the heart of your home and deserve special attention. Our remodeling team creates beautiful, functional spaces that combine quality materials, expert craftsmanship, and thoughtful design.",
+      "From custom cabinetry and countertops to tile work and fixture installation, we handle every aspect of your kitchen or bathroom project. We work closely with you to understand your style preferences and create spaces that exceed your expectations."
+    ],
+    projectTypes: [
+      "Complete kitchen remodels",
+      "Custom cabinet installation",
+      "Countertop fabrication & install",
+      "Bathroom renovations",
+      "Shower & tub surrounds",
+      "Tile flooring & backsplashes",
+      "Plumbing fixture upgrades"
+    ],
+    icon: "kitchen"
+  },
+  {
+    id: "epoxy",
+    title: "Epoxy Flooring",
+    description: [
+      "Upgrade your garage, basement, or commercial space with our professional epoxy flooring solutions. As certified epoxy installers, we deliver durable, beautiful floors that resist stains, chemicals, and wear while transforming ordinary concrete into a showroom-quality surface.",
+      "We offer a variety of epoxy systems including solid colors, metallic finishes, and decorative flake options. Our thorough preparation process ensures maximum adhesion and longevity, backed by our workmanship guarantee."
+    ],
+    projectTypes: [
+      "Garage floor coating",
+      "Basement floor finishing",
+      "Commercial & industrial floors",
+      "Metallic epoxy finishes",
+      "Decorative flake systems",
+      "Anti-slip coatings",
+      "Concrete repair & prep"
+    ],
+    icon: "epoxy"
+  },
+  {
+    id: "exterior",
+    title: "Exterior Work",
+    description: [
+      "Protect and beautify your home's exterior with our comprehensive exterior services. From siding installation to roofing, decks to drainage solutions, we handle all aspects of exterior construction and renovation.",
+      "We use quality materials designed to withstand Long Island's coastal climate, and our experienced crews ensure proper installation for lasting protection and curb appeal."
+    ],
+    projectTypes: [
+      "Siding installation & repair",
+      "Roofing & roof repair",
+      "Deck construction & refinishing",
+      "Window & door replacement",
+      "Gutter installation",
+      "Exterior painting",
+      "Drainage solutions"
+    ],
+    icon: "exterior"
+  },
+  {
+    id: "new-construction",
+    title: "Ground-Up New Construction",
+    description: [
+      "Building from the ground up gives you the opportunity to create exactly the space you envision. Our new construction services cover residential and light commercial projects, from initial planning through final inspection.",
+      "We work closely with architects, engineers, and municipal authorities to ensure your project meets all codes and specifications. Our experienced project management keeps your build on schedule and within budget."
+    ],
+    projectTypes: [
+      "Custom home construction",
+      "Accessory dwelling units (ADUs)",
+      "Garage & workshop buildings",
+      "Commercial build-outs",
+      "Additions & expansions",
+      "Detached structures",
+      "Site preparation"
+    ],
+    icon: "construction"
+  }
+];
+---
+
+<BaseLayout
+  title="Services"
+  description="JZ Development offers comprehensive construction services on Long Island including masonry, foundations, renovations, kitchens, bathrooms, epoxy flooring, exterior work, and new construction. Licensed & insured."
+>
+  <Header slot="header" />
+
+  <!-- Hero -->
+  <Hero
+    variant="page"
+    title="Our Services"
+    subtitle="Comprehensive construction services delivered with quality craftsmanship and attention to detail."
+  />
+
+  <!-- Services List -->
+  <section class="section bg-white">
+    <div class="container mx-auto px-4">
+      <div class="space-y-16 md:space-y-24">
+        {services.map((service, index) => (
+          <div id={service.id} class="scroll-mt-24">
+            <div class={`grid md:grid-cols-2 gap-8 md:gap-12 items-start ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+              <!-- Image Placeholder -->
+              <div class={`${index % 2 === 1 ? 'md:order-2' : ''}`}>
+                <div class="aspect-video md:aspect-[4/3] rounded-xl overflow-hidden bg-gradient-to-br from-[var(--medium-gray)] to-[var(--light-gray)] flex items-center justify-center sticky top-24">
+                  <div class="text-center p-8">
+                    <svg class="w-16 h-16 text-[var(--slate-blue)] opacity-30 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span class="text-sm text-gray-500">Service Photo Coming Soon</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class={`${index % 2 === 1 ? 'md:order-1' : ''}`}>
+                <h2 class="text-[var(--charcoal)] mb-4">{service.title}</h2>
+
+                <div class="space-y-4 mb-6">
+                  {service.description.map((paragraph) => (
+                    <p class="text-gray-600">{paragraph}</p>
+                  ))}
+                </div>
+
+                <div class="mb-6">
+                  <h3 class="text-lg font-bold text-[var(--charcoal)] mb-3">Common Project Types:</h3>
+                  <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {service.projectTypes.map((type) => (
+                      <li class="flex items-start gap-2">
+                        <svg class="w-5 h-5 text-[var(--accent-gold)] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="text-sm text-gray-600">{type}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3">
+                  <a href="/contact" class="btn btn-primary">
+                    Request a Quote
+                  </a>
+                  <a href="tel:+16316059851" class="btn bg-[var(--light-gray)] text-[var(--charcoal)] hover:bg-[var(--medium-gray)]">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    Call Us
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {index < services.length - 1 && (
+              <hr class="border-t border-gray-200 mt-16 md:mt-24" />
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection
+    title="Ready to Start Your Project?"
+    description="Get a free estimate for any of our services. We're here to answer your questions and help bring your vision to life."
+  />
+
+  <Footer slot="footer" />
+</BaseLayout>

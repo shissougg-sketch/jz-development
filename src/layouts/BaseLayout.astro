@@ -1,0 +1,121 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalURL?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalURL = Astro.url.href,
+  ogImage = '/images/og-default.jpg'
+} = Astro.props;
+
+const siteTitle = "JZ Development & Management LLC";
+const fullTitle = title === "Home" ? `${siteTitle} | Long Island General Contractor` : `${title} | ${siteTitle}`;
+
+// Local Business Schema
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "GeneralContractor",
+  "name": "JZ Development & Management LLC",
+  "image": "https://jzdevelopmentllc.com/logo.png",
+  "url": "https://jzdevelopmentllc.com",
+  "telephone": "+1-631-605-9851",
+  "email": "JZambolidevelopment@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "127a Pineway Ave",
+    "addressLocality": "Mastic Beach",
+    "addressRegion": "NY",
+    "postalCode": "11951",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 40.7668,
+    "longitude": -72.8521
+  },
+  "areaServed": [
+    {
+      "@type": "County",
+      "name": "Nassau County, NY"
+    },
+    {
+      "@type": "County",
+      "name": "Suffolk County, NY"
+    }
+  ],
+  "priceRange": "$$",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "07:00",
+    "closes": "18:00"
+  },
+  "sameAs": []
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={description} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content={siteTitle} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={fullTitle} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Local Business Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  </head>
+  <body class="min-h-screen flex flex-col bg-white">
+    <!-- Skip to Content Link -->
+    <a href="#main-content" class="skip-to-content">
+      Skip to main content
+    </a>
+
+    <slot name="header" />
+
+    <main id="main-content" class="flex-grow">
+      <slot />
+    </main>
+
+    <slot name="footer" />
+  </body>
+</html>

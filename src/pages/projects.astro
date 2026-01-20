@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import CTASection from '../components/CTASection.astro';
+
+interface Project {
+  id: number;
+  title: string;
+  category: string;
+  tags: string[];
+}
+
+const categories = [
+  { id: 'all', label: 'All Projects' },
+  { id: 'exterior', label: 'Exterior' },
+  { id: 'interior', label: 'Interior' },
+  { id: 'masonry', label: 'Masonry/Stone' },
+  { id: 'kitchens-baths', label: 'Kitchens/Baths' },
+  { id: 'epoxy', label: 'Epoxy' },
+  { id: 'new-construction', label: 'New Construction' }
+];
+
+// Placeholder projects - will be replaced with real data
+const projects: Project[] = [
+  { id: 1, title: "Modern Kitchen Remodel", category: "kitchens-baths", tags: ["interior", "kitchens-baths"] },
+  { id: 2, title: "Stone Veneer Facade", category: "masonry", tags: ["exterior", "masonry"] },
+  { id: 3, title: "Garage Epoxy Floor", category: "epoxy", tags: ["interior", "epoxy"] },
+  { id: 4, title: "Full Home Renovation", category: "interior", tags: ["interior"] },
+  { id: 5, title: "Paver Patio Install", category: "masonry", tags: ["exterior", "masonry"] },
+  { id: 6, title: "Bathroom Remodel", category: "kitchens-baths", tags: ["interior", "kitchens-baths"] },
+  { id: 7, title: "New Construction Home", category: "new-construction", tags: ["exterior", "new-construction"] },
+  { id: 8, title: "Basement Finishing", category: "interior", tags: ["interior"] },
+  { id: 9, title: "Retaining Wall", category: "masonry", tags: ["exterior", "masonry"] },
+  { id: 10, title: "Commercial Epoxy", category: "epoxy", tags: ["interior", "epoxy"] },
+  { id: 11, title: "Deck Construction", category: "exterior", tags: ["exterior"] },
+  { id: 12, title: "Kitchen Addition", category: "kitchens-baths", tags: ["interior", "kitchens-baths", "new-construction"] }
+];
+---
+
+<BaseLayout
+  title="Projects"
+  description="Browse our portfolio of completed construction projects on Long Island. View our masonry, renovation, kitchen, bathroom, epoxy flooring, and new construction work."
+>
+  <Header slot="header" />
+
+  <!-- Hero -->
+  <Hero
+    variant="page"
+    title="Our Projects"
+    subtitle="Browse our portfolio and see the quality craftsmanship we bring to every project."
+  />
+
+  <!-- Gallery Section -->
+  <section class="section bg-white">
+    <div class="container mx-auto px-4">
+      <!-- Filter Buttons -->
+      <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10">
+        {categories.map((cat) => (
+          <button
+            class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all border-2 border-[var(--slate-blue)]"
+            data-filter={cat.id}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
+
+      <!-- Projects Grid -->
+      <div id="projects-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        {projects.map((project) => (
+          <div
+            class="project-item group relative aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-[var(--medium-gray)] to-[var(--light-gray)] cursor-pointer"
+            data-categories={project.tags.join(',')}
+          >
+            <!-- Placeholder Content -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+              <svg class="w-12 h-12 text-[var(--slate-blue)] opacity-30 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-xs text-gray-500">Photo Coming Soon</span>
+            </div>
+
+            <!-- Hover Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[var(--charcoal)] via-[var(--charcoal)]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <p class="text-white font-semibold text-sm md:text-base">{project.title}</p>
+                <p class="text-gray-300 text-xs capitalize">{project.category.replace('-', ' ')}</p>
+              </div>
+            </div>
+
+            <!-- Click indicator -->
+            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- No Results Message -->
+      <div id="no-results" class="hidden text-center py-12">
+        <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p class="text-gray-500">No projects found in this category.</p>
+        <button id="show-all-btn" class="mt-4 text-[var(--slate-blue)] font-medium hover:underline">
+          Show all projects
+        </button>
+      </div>
+
+      <!-- Coming Soon Note -->
+      <div class="text-center mt-10 p-6 bg-[var(--light-gray)] rounded-xl">
+        <p class="text-gray-600 mb-2">
+          <strong>Project photos coming soon!</strong>
+        </p>
+        <p class="text-sm text-gray-500">
+          We're currently gathering photos of our completed work. Check back soon to see our full portfolio, or contact us to discuss your project.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection
+    title="Have a Project in Mind?"
+    description="Contact us to discuss your project and get a free estimate. We'd love to add your project to our portfolio!"
+  />
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<script>
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const projectItems = document.querySelectorAll('.project-item');
+  const noResults = document.getElementById('no-results');
+  const showAllBtn = document.getElementById('show-all-btn');
+
+  function setActiveFilter(activeFilter: string) {
+    // Update button styles
+    filterButtons.forEach((btn) => {
+      const filter = btn.getAttribute('data-filter');
+      if (filter === activeFilter) {
+        btn.classList.add('bg-[var(--slate-blue)]', 'text-white');
+        btn.classList.remove('bg-transparent', 'text-[var(--slate-blue)]');
+      } else {
+        btn.classList.remove('bg-[var(--slate-blue)]', 'text-white');
+        btn.classList.add('bg-transparent', 'text-[var(--slate-blue)]');
+      }
+    });
+
+    // Filter projects
+    let visibleCount = 0;
+    projectItems.forEach((item) => {
+      const categories = item.getAttribute('data-categories')?.split(',') || [];
+      const shouldShow = activeFilter === 'all' || categories.includes(activeFilter);
+
+      if (shouldShow) {
+        item.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+
+    // Show/hide no results message
+    if (noResults) {
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+    }
+  }
+
+  // Initialize with "all" selected
+  setActiveFilter('all');
+
+  // Add click handlers
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+      if (filter) {
+        setActiveFilter(filter);
+      }
+    });
+  });
+
+  // Show all button handler
+  showAllBtn?.addEventListener('click', () => {
+    setActiveFilter('all');
+  });
+</script>
+
+<style>
+  .filter-btn {
+    background-color: transparent;
+    color: var(--slate-blue);
+  }
+
+  .filter-btn:hover {
+    background-color: var(--slate-blue);
+    color: white;
+  }
+</style>
