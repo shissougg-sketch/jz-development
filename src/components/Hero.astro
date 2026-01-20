@@ -23,7 +23,7 @@ const {
       <!-- Stock construction image background -->
       <div
         class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-        style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80');"
+        style="background-image: url('/images/hero.webp');"
       ></div>
       <!-- Gradient overlay for text legibility -->
       <div class="absolute inset-0 bg-gradient-to-r from-[var(--charcoal)]/90 via-[var(--charcoal)]/70 to-transparent"></div>
@@ -46,12 +46,6 @@ const {
     <!-- Content -->
     <div class="relative container mx-auto px-4 py-24 md:py-32">
       <div class="max-w-4xl">
-        <!-- Free Estimate Badge -->
-        <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-[var(--secondary)]/20 border border-[var(--secondary)]/30 rounded-full backdrop-blur-sm">
-          <span class="w-2 h-2 bg-[var(--secondary)] rounded-full animate-pulse"></span>
-          <span class="text-[var(--secondary)] text-sm font-semibold uppercase tracking-wider">Free Estimates</span>
-        </div>
-
         <h1 class="mb-6 text-balance leading-tight">
           <span class="block text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">{title.split('.')[0]}.</span>
           {title.split('.')[1] && <span class="block text-[var(--secondary)] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">{title.split('.')[1].trim()}</span>}
