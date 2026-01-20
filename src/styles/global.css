@@ -310,3 +310,36 @@ select:focus-visible {
 .section-title {
   text-shadow: 2px 2px 0 rgba(249, 115, 22, 0.15);
 }
+
+/* Service Explorer Tab Styles */
+.service-tab {
+  transition: all 0.2s ease;
+}
+
+.service-panel {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Service Accordion Styles */
+.service-accordion {
+  transition: box-shadow 0.2s ease;
+}
+
+.service-accordion:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-accordion[open] {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
