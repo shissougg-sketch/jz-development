@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import FloatingCTA from '../components/FloatingCTA.astro';
 
 interface Props {
   title: string;
@@ -26,7 +27,7 @@ const localBusinessSchema = {
   "image": "https://jzdevelopmentllc.com/logo.png",
   "url": "https://jzdevelopmentllc.com",
   "telephone": "+1-631-605-9851",
-  "email": "JZambolidevelopment@gmail.com",
+  "email": "JZamboliDevelopment@gmail.com",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "127a Pineway Ave",
@@ -48,7 +49,85 @@ const localBusinessSchema = {
     {
       "@type": "County",
       "name": "Suffolk County, NY"
-    }
+    },
+    // Suffolk County Towns
+    { "@type": "City", "name": "Babylon, NY" },
+    { "@type": "City", "name": "Brookhaven, NY" },
+    { "@type": "City", "name": "East Hampton, NY" },
+    { "@type": "City", "name": "Huntington, NY" },
+    { "@type": "City", "name": "Islip, NY" },
+    { "@type": "City", "name": "Riverhead, NY" },
+    { "@type": "City", "name": "Smithtown, NY" },
+    { "@type": "City", "name": "Southampton, NY" },
+    { "@type": "City", "name": "Southold, NY" },
+    { "@type": "City", "name": "Shelter Island, NY" },
+    { "@type": "City", "name": "Patchogue, NY" },
+    { "@type": "City", "name": "Bay Shore, NY" },
+    { "@type": "City", "name": "Commack, NY" },
+    { "@type": "City", "name": "Centereach, NY" },
+    { "@type": "City", "name": "Coram, NY" },
+    { "@type": "City", "name": "Deer Park, NY" },
+    { "@type": "City", "name": "Dix Hills, NY" },
+    { "@type": "City", "name": "Hauppauge, NY" },
+    { "@type": "City", "name": "Holbrook, NY" },
+    { "@type": "City", "name": "Lake Grove, NY" },
+    { "@type": "City", "name": "Lindenhurst, NY" },
+    { "@type": "City", "name": "Medford, NY" },
+    { "@type": "City", "name": "Mastic, NY" },
+    { "@type": "City", "name": "Mastic Beach, NY" },
+    { "@type": "City", "name": "Miller Place, NY" },
+    { "@type": "City", "name": "Mount Sinai, NY" },
+    { "@type": "City", "name": "Port Jefferson, NY" },
+    { "@type": "City", "name": "Ronkonkoma, NY" },
+    { "@type": "City", "name": "Sayville, NY" },
+    { "@type": "City", "name": "Selden, NY" },
+    { "@type": "City", "name": "Shirley, NY" },
+    { "@type": "City", "name": "West Babylon, NY" },
+    { "@type": "City", "name": "West Islip, NY" },
+    // Nassau County Towns
+    { "@type": "City", "name": "Hempstead, NY" },
+    { "@type": "City", "name": "North Hempstead, NY" },
+    { "@type": "City", "name": "Oyster Bay, NY" },
+    { "@type": "City", "name": "Baldwin, NY" },
+    { "@type": "City", "name": "Bellmore, NY" },
+    { "@type": "City", "name": "Bethpage, NY" },
+    { "@type": "City", "name": "Carle Place, NY" },
+    { "@type": "City", "name": "East Meadow, NY" },
+    { "@type": "City", "name": "East Rockaway, NY" },
+    { "@type": "City", "name": "Elmont, NY" },
+    { "@type": "City", "name": "Farmingdale, NY" },
+    { "@type": "City", "name": "Franklin Square, NY" },
+    { "@type": "City", "name": "Freeport, NY" },
+    { "@type": "City", "name": "Garden City, NY" },
+    { "@type": "City", "name": "Glen Cove, NY" },
+    { "@type": "City", "name": "Great Neck, NY" },
+    { "@type": "City", "name": "Hicksville, NY" },
+    { "@type": "City", "name": "Island Park, NY" },
+    { "@type": "City", "name": "Jericho, NY" },
+    { "@type": "City", "name": "Levittown, NY" },
+    { "@type": "City", "name": "Long Beach, NY" },
+    { "@type": "City", "name": "Lynbrook, NY" },
+    { "@type": "City", "name": "Malverne, NY" },
+    { "@type": "City", "name": "Manhasset, NY" },
+    { "@type": "City", "name": "Massapequa, NY" },
+    { "@type": "City", "name": "Massapequa Park, NY" },
+    { "@type": "City", "name": "Merrick, NY" },
+    { "@type": "City", "name": "Mineola, NY" },
+    { "@type": "City", "name": "New Hyde Park, NY" },
+    { "@type": "City", "name": "Oceanside, NY" },
+    { "@type": "City", "name": "Plainview, NY" },
+    { "@type": "City", "name": "Port Washington, NY" },
+    { "@type": "City", "name": "Rockville Centre, NY" },
+    { "@type": "City", "name": "Roosevelt, NY" },
+    { "@type": "City", "name": "Roslyn, NY" },
+    { "@type": "City", "name": "Seaford, NY" },
+    { "@type": "City", "name": "Syosset, NY" },
+    { "@type": "City", "name": "Uniondale, NY" },
+    { "@type": "City", "name": "Valley Stream, NY" },
+    { "@type": "City", "name": "Wantagh, NY" },
+    { "@type": "City", "name": "Westbury, NY" },
+    { "@type": "City", "name": "Williston Park, NY" },
+    { "@type": "City", "name": "Woodbury, NY" }
   ],
   "priceRange": "$$",
   "openingHoursSpecification": {
@@ -117,5 +196,8 @@ const localBusinessSchema = {
     </main>
 
     <slot name="footer" />
+
+    <!-- Floating CTA -->
+    <FloatingCTA />
   </body>
 </html>

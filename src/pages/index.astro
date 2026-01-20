@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
-import TrustBadges from '../components/TrustBadges.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import TestimonialStrip from '../components/TestimonialStrip.astro';
 import CTASection from '../components/CTASection.astro';
@@ -41,7 +40,7 @@ const services = [
   },
   {
     title: "Exterior Work",
-    description: "Siding, roofing, decks, and complete exterior renovations.",
+    description: "Siding, decks, and complete exterior renovations.",
     href: "/services#exterior",
     icon: "exterior"
   },
@@ -50,16 +49,46 @@ const services = [
     description: "Ground-up residential and commercial construction projects.",
     href: "/services#new-construction",
     icon: "construction"
+  },
+  {
+    title: "Basement Waterproofing",
+    description: "French drains, sump pumps, moisture barriers, and foundation sealing.",
+    href: "/services#waterproofing",
+    icon: "waterproofing"
   }
 ];
 
 const featuredProjects = [
-  { title: "Kitchen Renovation", category: "Interior" },
-  { title: "Stone Veneer Installation", category: "Masonry" },
-  { title: "Epoxy Garage Floor", category: "Epoxy" },
-  { title: "Full Home Renovation", category: "Renovation" },
-  { title: "New Construction", category: "New Build" },
-  { title: "Bathroom Remodel", category: "Interior" }
+  {
+    title: "Kitchen Renovation",
+    category: "Interior",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    title: "Stone Veneer Installation",
+    category: "Masonry",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    title: "Epoxy Garage Floor",
+    category: "Epoxy",
+    image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    title: "Full Home Renovation",
+    category: "Renovation",
+    image: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    title: "New Construction",
+    category: "New Build",
+    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    title: "Bathroom Remodel",
+    category: "Interior",
+    image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=600&q=80"
+  }
 ];
 ---
 
@@ -74,9 +103,6 @@ const featuredProjects = [
     title="Quality Craftsmanship. Lasting Results."
     subtitle="Long Island's trusted general contractor for masonry, renovations, and new construction. 25+ years of experience delivering exceptional results."
   />
-
-  <!-- Trust Badges -->
-  <TrustBadges />
 
   <!-- Services Section -->
   <section class="section bg-white">
@@ -119,21 +145,29 @@ const featuredProjects = [
 
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
         {featuredProjects.map((project) => (
-          <div class="group relative aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-[var(--medium-gray)] to-[var(--light-gray)]">
-            <!-- Placeholder content -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-              <svg class="w-12 h-12 text-[var(--slate-blue)] opacity-30 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span class="text-xs text-gray-500">Photo Coming Soon</span>
+          <div class="group relative aspect-square rounded-xl overflow-hidden shadow-lg card-hover">
+            <!-- Project image -->
+            <img
+              src={project.image}
+              alt={project.title}
+              class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              loading="lazy"
+            />
+
+            <!-- Gradient overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[var(--charcoal)] via-[var(--charcoal)]/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+
+            <!-- Content always visible -->
+            <div class="absolute bottom-0 left-0 right-0 p-4 md:p-5">
+              <span class="inline-block px-2 py-1 text-xs font-semibold text-[var(--secondary)] bg-white/10 backdrop-blur-sm rounded mb-2">{project.category}</span>
+              <p class="text-white font-bold text-lg">{project.title}</p>
             </div>
 
-            <!-- Hover overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-[var(--charcoal)] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div class="absolute bottom-0 left-0 right-0 p-4">
-                <p class="text-white font-semibold">{project.title}</p>
-                <p class="text-gray-300 text-sm">{project.category}</p>
-              </div>
+            <!-- View project indicator on hover -->
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span class="px-4 py-2 bg-[var(--secondary)] text-white font-semibold rounded-lg transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                View Project
+              </span>
             </div>
           </div>
         ))}

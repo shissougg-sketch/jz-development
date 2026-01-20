@@ -1,0 +1,92 @@
+---
+// Floating CTA - Mobile-first call-to-action button
+---
+
+<!-- Floating CTA for Mobile -->
+<div id="floating-cta" class="fixed bottom-6 right-6 z-50 md:hidden opacity-0 translate-y-4 transition-all duration-300">
+  <a
+    href="tel:+16316059851"
+    class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[var(--secondary)] to-[var(--secondary-dark)] rounded-full shadow-lg hover:shadow-xl transition-all floating-cta"
+    aria-label="Call JZ Development"
+  >
+    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+    </svg>
+  </a>
+  <!-- Label that appears on hover/focus -->
+  <span class="absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap bg-[var(--charcoal)] text-white text-sm font-medium px-3 py-2 rounded-lg opacity-0 pointer-events-none transition-opacity" id="cta-label">
+    Call Now
+  </span>
+</div>
+
+<!-- Desktop floating quote button -->
+<div id="floating-cta-desktop" class="fixed bottom-8 right-8 z-50 hidden md:block opacity-0 translate-y-4 transition-all duration-300">
+  <a
+    href="/contact"
+    class="flex items-center gap-2 px-6 py-4 bg-gradient-to-r from-[var(--secondary)] to-[var(--secondary-dark)] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all floating-cta group"
+  >
+    <span>Get Free Quote</span>
+    <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    </svg>
+  </a>
+</div>
+
+<script>
+  // Show floating CTA after scrolling past hero section
+  const floatingCTA = document.getElementById('floating-cta');
+  const floatingCTADesktop = document.getElementById('floating-cta-desktop');
+  const ctaLabel = document.getElementById('cta-label');
+
+  let lastScrollY = 0;
+  let ticking = false;
+
+  function updateFloatingCTA() {
+    const scrollY = window.scrollY;
+    const showThreshold = 400; // Show after scrolling 400px
+
+    if (floatingCTA) {
+      if (scrollY > showThreshold) {
+        floatingCTA.classList.remove('opacity-0', 'translate-y-4');
+        floatingCTA.classList.add('opacity-100', 'translate-y-0');
+      } else {
+        floatingCTA.classList.add('opacity-0', 'translate-y-4');
+        floatingCTA.classList.remove('opacity-100', 'translate-y-0');
+      }
+    }
+
+    if (floatingCTADesktop) {
+      if (scrollY > showThreshold) {
+        floatingCTADesktop.classList.remove('opacity-0', 'translate-y-4');
+        floatingCTADesktop.classList.add('opacity-100', 'translate-y-0');
+      } else {
+        floatingCTADesktop.classList.add('opacity-0', 'translate-y-4');
+        floatingCTADesktop.classList.remove('opacity-100', 'translate-y-0');
+      }
+    }
+
+    ticking = false;
+  }
+
+  function onScroll() {
+    lastScrollY = window.scrollY;
+    if (!ticking) {
+      window.requestAnimationFrame(updateFloatingCTA);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Show label on hover/focus for mobile
+  if (floatingCTA && ctaLabel) {
+    floatingCTA.addEventListener('mouseenter', () => {
+      ctaLabel.classList.remove('opacity-0');
+      ctaLabel.classList.add('opacity-100');
+    });
+    floatingCTA.addEventListener('mouseleave', () => {
+      ctaLabel.classList.add('opacity-0');
+      ctaLabel.classList.remove('opacity-100');
+    });
+  }
+</script>
