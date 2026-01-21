@@ -34,8 +34,7 @@ const projects: Project[] = [
     category: "basements",
     tags: ["interior"],
     beforeImage: "/images/projects/basements/basement-before-02-01.webp",
-    afterImage: "/images/projects/basements/basement-after-02-03.webp",
-    duringImages: ["/images/projects/basements/basement-02-02.webp"]
+    afterImage: "/images/projects/basements/basement-after-02-02.webp"
   },
   {
     id: 2,
@@ -222,11 +221,9 @@ const projects: Project[] = [
     filterButtons.forEach((btn) => {
       const filter = btn.getAttribute('data-filter');
       if (filter === activeFilter) {
-        btn.classList.add('bg-[var(--slate-blue)]', 'text-white');
-        btn.classList.remove('bg-transparent', 'text-[var(--slate-blue)]');
+        btn.classList.add('active');
       } else {
-        btn.classList.remove('bg-[var(--slate-blue)]', 'text-white');
-        btn.classList.add('bg-transparent', 'text-[var(--slate-blue)]');
+        btn.classList.remove('active');
       }
     });
 
@@ -279,7 +276,8 @@ const projects: Project[] = [
     color: var(--slate-blue);
   }
 
-  .filter-btn:hover {
+  .filter-btn:hover,
+  .filter-btn.active {
     background-color: var(--slate-blue);
     color: white;
   }
