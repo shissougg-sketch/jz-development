@@ -45,17 +45,28 @@ const budgetRanges = [
       <div class="grid lg:grid-cols-5 gap-8 lg:gap-12">
         <!-- Contact Form -->
         <div class="lg:col-span-3">
-          <div id="quote-form-container" class="bg-[var(--light-gray)] rounded-xl p-6 md:p-8">
+          <div id="quote-form-container" class="bg-[var(--light-gray)] rounded-xl p-6 md:p-8 scroll-mt-24">
             <h2 class="text-[var(--charcoal)] mb-2 section-title">Request a Free Quote</h2>
             <p class="text-gray-600 mb-6">
               Fill out the form below and we'll get back to you within 24 hours.
             </p>
 
+            <!-- Progress Indicator -->
+            <div id="progress-indicator" class="mb-6">
+              <div class="flex items-center justify-between mb-2">
+                <span id="step-label" class="text-sm font-medium text-[var(--primary)]">Step 1 of 2</span>
+                <span id="step-desc" class="text-sm text-gray-500">Your Contact Info</span>
+              </div>
+              <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full bg-[var(--secondary)] rounded-full transition-all duration-300" style="width: 50%"></div>
+              </div>
+            </div>
+
             <form
+              id="quote-form"
               action="https://formsubmit.co/JZamboliDevelopment@gmail.com"
               method="POST"
               enctype="multipart/form-data"
-              class="space-y-5"
             >
               <!-- FormSubmit Configuration -->
               <input type="hidden" name="_subject" value="New Quote Request - JZ Development" />
@@ -63,91 +74,65 @@ const budgetRanges = [
               <input type="hidden" name="_template" value="table" />
               <input type="text" name="_honey" style="display:none" />
 
-              <!-- Name & Phone Row -->
-              <div class="grid sm:grid-cols-2 gap-4">
+              <!-- STEP 1: Contact Info -->
+              <div id="step-1" class="space-y-5">
+                <!-- Name & Phone Row -->
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+                      Full Name <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      minlength="2"
+                      placeholder="John Smith"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition"
+                    />
+                  </div>
+                  <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">
+                      Phone Number <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      required
+                      placeholder="(631) 555-1234"
+                      pattern="[\d\s\-\(\)\+]+"
+                      title="Please enter a valid phone number"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition"
+                    />
+                  </div>
+                </div>
+
+                <!-- Email -->
                 <div>
-                  <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
-                    Full Name <span class="text-red-500">*</span>
+                  <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                    Email Address <span class="text-red-500">*</span>
                   </label>
                   <input
-                    type="text"
-                    id="name"
-                    name="name"
+                    type="email"
+                    id="email"
+                    name="email"
                     required
-                    minlength="2"
-                    placeholder="John Smith"
+                    placeholder="john@example.com"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition"
                   />
                 </div>
-                <div>
-                  <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">
-                    Phone Number <span class="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    placeholder="(631) 555-1234"
-                    pattern="[\d\s\-\(\)\+]+"
-                    title="Please enter a valid phone number"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition"
-                  />
-                </div>
-              </div>
 
-              <!-- Email -->
-              <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-                  Email Address <span class="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="john@example.com"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition"
-                />
-              </div>
-
-              <!-- Property Address -->
-              <div class="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label for="street" class="block text-sm font-medium text-gray-700 mb-1">
-                    Street Address
-                  </label>
-                  <input
-                    type="text"
-                    id="street"
-                    name="street_address"
-                    placeholder="123 Main St"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition"
-                  />
-                </div>
-                <div>
-                  <label for="town" class="block text-sm font-medium text-gray-700 mb-1">
-                    Town
-                  </label>
-                  <input
-                    type="text"
-                    id="town"
-                    name="town"
-                    placeholder="Smithtown, NY 11787"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition"
-                  />
-                </div>
-              </div>
-
-              <!-- Project Type & Budget Row -->
-              <div class="grid sm:grid-cols-2 gap-4">
+                <!-- Project Type -->
                 <div>
                   <label for="project-type" class="block text-sm font-medium text-gray-700 mb-1">
-                    Project Type
+                    Project Type <span class="text-red-500">*</span>
                   </label>
                   <select
                     id="project-type"
                     name="project_type"
+                    required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition bg-white"
                   >
                     <option value="">Select a project type...</option>
@@ -156,6 +141,47 @@ const budgetRanges = [
                     ))}
                   </select>
                 </div>
+
+                <!-- Next Button -->
+                <button type="button" id="next-step-btn" class="btn btn-primary w-full text-lg py-4">
+                  Continue
+                  <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </button>
+              </div>
+
+              <!-- STEP 2: Project Details -->
+              <div id="step-2" class="space-y-5 hidden">
+                <!-- Property Address -->
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="street" class="block text-sm font-medium text-gray-700 mb-1">
+                      Street Address
+                    </label>
+                    <input
+                      type="text"
+                      id="street"
+                      name="street_address"
+                      placeholder="123 Main St"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition"
+                    />
+                  </div>
+                  <div>
+                    <label for="town" class="block text-sm font-medium text-gray-700 mb-1">
+                      Town
+                    </label>
+                    <input
+                      type="text"
+                      id="town"
+                      name="town"
+                      placeholder="Smithtown, NY 11787"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition"
+                    />
+                  </div>
+                </div>
+
+                <!-- Budget Range -->
                 <div>
                   <label for="budget" class="block text-sm font-medium text-gray-700 mb-1">
                     Budget Range
@@ -171,61 +197,69 @@ const budgetRanges = [
                     ))}
                   </select>
                 </div>
-              </div>
 
-              <!-- Project Description -->
-              <div>
-                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">
-                  Project Description <span class="text-red-500">*</span>
-                </label>
-                <textarea
-                  id="description"
-                  name="description"
-                  rows="4"
-                  required
-                  minlength="20"
-                  placeholder="Please describe your project, including any specific requirements or questions..."
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition resize-none"
-                ></textarea>
-              </div>
-
-              <!-- File Upload -->
-              <div>
-                <label for="attachments" class="block text-sm font-medium text-gray-700 mb-1">
-                  Attach Photos or Plans (Optional)
-                </label>
-                <div
-                  id="drop-zone"
-                  class="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-[var(--slate-blue)] transition-colors cursor-pointer"
-                >
-                  <input
-                    type="file"
-                    id="attachments"
-                    accept="image/*,.pdf,.doc,.docx"
-                    multiple
-                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  />
-                  <div id="drop-zone-content">
-                    <svg class="w-10 h-10 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                    <p class="text-gray-600 mb-1">Drag and drop files here, or <span class="text-[var(--slate-blue)] font-medium">browse</span></p>
-                  </div>
-                  <div id="file-previews" class="grid grid-cols-3 sm:grid-cols-4 gap-3 mt-4"></div>
+                <!-- Project Description -->
+                <div>
+                  <label for="description" class="block text-sm font-medium text-gray-700 mb-1">
+                    Project Description <span class="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    rows="4"
+                    required
+                    minlength="20"
+                    placeholder="Please describe your project, including any specific requirements or questions..."
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--slate-blue)] focus:border-transparent transition resize-none"
+                  ></textarea>
                 </div>
-                <p class="text-xs text-gray-500 mt-1">
-                  Accepted formats: Images, PDF, Word documents. Max 5MB per file.
+
+                <!-- File Upload -->
+                <div>
+                  <label for="attachments" class="block text-sm font-medium text-gray-700 mb-1">
+                    Attach Photos or Plans (Optional)
+                  </label>
+                  <div
+                    id="drop-zone"
+                    class="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-[var(--slate-blue)] transition-colors cursor-pointer"
+                  >
+                    <input
+                      type="file"
+                      id="attachments"
+                      accept="image/*,.pdf,.doc,.docx"
+                      multiple
+                      class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    />
+                    <div id="drop-zone-content">
+                      <svg class="w-10 h-10 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                      </svg>
+                      <p class="text-gray-600 mb-1">Drag and drop files here, or <span class="text-[var(--slate-blue)] font-medium">browse</span></p>
+                    </div>
+                    <div id="file-previews" class="grid grid-cols-3 sm:grid-cols-4 gap-3 mt-4"></div>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-1">
+                    Accepted formats: Images, PDF, Word documents. Max 5MB per file.
+                  </p>
+                </div>
+
+                <!-- Back & Submit Buttons -->
+                <div class="flex gap-3">
+                  <button type="button" id="back-step-btn" class="btn bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 flex-shrink-0">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                    </svg>
+                    Back
+                  </button>
+                  <button type="submit" class="btn btn-primary flex-1 text-lg py-4">
+                    Submit Request
+                  </button>
+                </div>
+
+                <p class="text-xs text-gray-500 text-center">
+                  By submitting this form, you agree to be contacted regarding your project.
                 </p>
               </div>
-
-              <!-- Submit Button -->
-              <button type="submit" class="btn btn-primary w-full text-lg py-4">
-                Submit Request
-              </button>
-
-              <p class="text-xs text-gray-500 text-center">
-                By submitting this form, you agree to be contacted regarding your project.
-              </p>
             </form>
           </div>
         </div>
@@ -248,6 +282,19 @@ const budgetRanges = [
                     <p class="text-sm text-gray-400">Call Us</p>
                     <p class="font-semibold text-lg">(631) 605-9851</p>
                     <p class="text-sm text-gray-400">Tap to call</p>
+                  </div>
+                </a>
+
+                <a id="contact-sms-link" href="sms:+16316059851" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/10 transition-colors">
+                  <div class="w-12 h-12 rounded-full bg-[var(--slate-blue)] flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-400">Text Us</p>
+                    <p class="font-semibold text-lg">(631) 605-9851</p>
+                    <p class="text-sm text-gray-400">Tap to text</p>
                   </div>
                 </a>
 
@@ -329,21 +376,31 @@ const budgetRanges = [
 </BaseLayout>
 
 <script>
-  const form = document.querySelector('#quote-form-container form') as HTMLFormElement;
+  const form = document.getElementById('quote-form') as HTMLFormElement;
   const container = document.getElementById('quote-form-container') as HTMLElement;
   const dropZone = document.getElementById('drop-zone') as HTMLElement;
   const dropZoneContent = document.getElementById('drop-zone-content') as HTMLElement;
   const fileInput = document.getElementById('attachments') as HTMLInputElement;
   const filePreviews = document.getElementById('file-previews') as HTMLElement;
 
+  // Step elements
+  const step1 = document.getElementById('step-1') as HTMLElement;
+  const step2 = document.getElementById('step-2') as HTMLElement;
+  const nextBtn = document.getElementById('next-step-btn') as HTMLButtonElement;
+  const backBtn = document.getElementById('back-step-btn') as HTMLButtonElement;
+  const stepLabel = document.getElementById('step-label') as HTMLElement;
+  const stepDesc = document.getElementById('step-desc') as HTMLElement;
+  const progressBar = document.getElementById('progress-bar') as HTMLElement;
+
   // Track selected files (since FileList is immutable)
   let selectedFiles: File[] = [];
 
-  // Pre-fill form from URL params (from quick quote form)
+  // Pre-fill form from URL params (from quick quote form or services page)
   const urlParams = new URLSearchParams(window.location.search);
   const nameParam = urlParams.get('name');
   const phoneParam = urlParams.get('phone');
   const descriptionParam = urlParams.get('description');
+  const serviceParam = urlParams.get('service');
 
   if (nameParam) {
     (document.getElementById('name') as HTMLInputElement).value = nameParam;
@@ -354,6 +411,112 @@ const budgetRanges = [
   if (descriptionParam) {
     (document.getElementById('description') as HTMLTextAreaElement).value = descriptionParam;
   }
+  if (serviceParam) {
+    const projectTypeSelect = document.getElementById('project-type') as HTMLSelectElement;
+    // Map service shortTitles to project types
+    const serviceToProjectType: Record<string, string> = {
+      'home renovations': 'Full Gut Renovation',
+      'kitchen & bath': 'Kitchen Remodel',
+      'masonry': 'Masonry & Stonework',
+      'exterior': 'Exterior Work (Siding, Deck, Fence)',
+      'concrete': 'Foundations & Concrete',
+      'epoxy flooring': 'Epoxy Flooring',
+      'new construction': 'New Construction',
+      'maintenance': 'Other'
+    };
+
+    const normalizedService = serviceParam.toLowerCase();
+    const mappedType = serviceToProjectType[normalizedService];
+
+    if (mappedType) {
+      projectTypeSelect.value = mappedType;
+    } else {
+      // Fallback: try partial matching
+      const options = Array.from(projectTypeSelect.options);
+      const matchingOption = options.find(opt =>
+        opt.value.toLowerCase().includes(normalizedService) ||
+        normalizedService.includes(opt.value.toLowerCase().split(' ')[0])
+      );
+      if (matchingOption) {
+        projectTypeSelect.value = matchingOption.value;
+      }
+    }
+  }
+
+  // Step navigation
+  function goToStep(stepNumber: number) {
+    if (stepNumber === 1) {
+      step1.classList.remove('hidden');
+      step2.classList.add('hidden');
+      stepLabel.textContent = 'Step 1 of 2';
+      stepDesc.textContent = 'Your Contact Info';
+      progressBar.style.width = '50%';
+    } else {
+      step1.classList.add('hidden');
+      step2.classList.remove('hidden');
+      stepLabel.textContent = 'Step 2 of 2';
+      stepDesc.textContent = 'Project Details';
+      progressBar.style.width = '100%';
+      // Focus first field in step 2
+      (document.getElementById('street') as HTMLInputElement)?.focus();
+    }
+    // Scroll to top of form
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Validate step 1 fields
+  function validateStep1(): boolean {
+    const nameInput = document.getElementById('name') as HTMLInputElement;
+    const phoneInput = document.getElementById('phone') as HTMLInputElement;
+    const emailInput = document.getElementById('email') as HTMLInputElement;
+    const projectTypeSelect = document.getElementById('project-type') as HTMLSelectElement;
+
+    // Check name
+    if (!nameInput.value || nameInput.value.length < 2) {
+      nameInput.focus();
+      nameInput.classList.add('border-red-500');
+      return false;
+    }
+    nameInput.classList.remove('border-red-500');
+
+    // Check phone
+    if (!isValidPhone(phoneInput.value)) {
+      showPhoneError(true);
+      phoneInput.focus();
+      return false;
+    }
+    showPhoneError(false);
+
+    // Check email
+    if (!emailInput.value || !emailInput.validity.valid) {
+      emailInput.focus();
+      emailInput.classList.add('border-red-500');
+      return false;
+    }
+    emailInput.classList.remove('border-red-500');
+
+    // Check project type
+    if (!projectTypeSelect.value) {
+      projectTypeSelect.focus();
+      projectTypeSelect.classList.add('border-red-500');
+      return false;
+    }
+    projectTypeSelect.classList.remove('border-red-500');
+
+    return true;
+  }
+
+  // Next button click
+  nextBtn.addEventListener('click', () => {
+    if (validateStep1()) {
+      goToStep(2);
+    }
+  });
+
+  // Back button click
+  backBtn.addEventListener('click', () => {
+    goToStep(1);
+  });
 
   // Drag and drop handling
   ['dragenter', 'dragover'].forEach(eventName => {
@@ -480,14 +643,14 @@ const budgetRanges = [
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Validate phone number
-    const phoneInput = document.getElementById('phone') as HTMLInputElement;
-    if (!isValidPhone(phoneInput.value)) {
-      showPhoneError(true);
-      phoneInput.focus();
+    // Validate description in step 2
+    const descriptionInput = document.getElementById('description') as HTMLTextAreaElement;
+    if (!descriptionInput.value || descriptionInput.value.length < 20) {
+      descriptionInput.focus();
+      descriptionInput.classList.add('border-red-500');
       return;
     }
-    showPhoneError(false);
+    descriptionInput.classList.remove('border-red-500');
 
     const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
     const originalText = submitBtn.textContent;
@@ -561,4 +724,5 @@ const budgetRanges = [
       alert('There was an error submitting your request. Please try again or call us directly at (631) 605-9851.');
     }
   });
+
 </script>

@@ -86,7 +86,7 @@ const currentPath = Astro.url.pathname;
         </a>
 
         <!-- CTA Button -->
-        <a href="/contact" class="btn btn-secondary">
+        <a href="/contact#quote-form-container" class="btn btn-secondary">
           Free Quote
         </a>
       </div>
@@ -94,53 +94,88 @@ const currentPath = Astro.url.pathname;
     </nav>
   </div>
 
-  <!-- Mobile Menu -->
+  <!-- Mobile Menu Backdrop -->
+  <div
+    id="mobile-menu-backdrop"
+    class="fixed inset-0 bg-black/0 z-40 hidden lg:hidden transition-colors duration-300"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Mobile Menu Drawer -->
   <div
     id="mobile-menu"
-    class="lg:hidden hidden bg-white border-t border-gray-100"
+    class="fixed top-0 left-0 h-full w-[85%] max-w-[320px] bg-white z-50 lg:hidden transform -translate-x-full transition-transform duration-300 ease-out shadow-2xl"
     aria-hidden="true"
   >
-    <div class="container mx-auto px-4 py-4">
-      <ul class="flex flex-col gap-1">
-        {navLinks.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class={`block py-3 px-4 font-medium transition-all rounded-lg hover:bg-[var(--primary)]/5 hover:text-[var(--primary)] ${
-                currentPath === link.href
-                  ? 'text-[var(--primary)] bg-[var(--primary)]/5'
-                  : 'text-[var(--charcoal)]'
-              }`}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-3">
-        <a href="/contact" class="btn btn-secondary w-full text-center justify-center">
+    <!-- Drawer Header -->
+    <div class="flex items-center justify-between p-4 border-b border-gray-100">
+      <a href="/" class="flex items-center">
+        <img
+          src="/images/colorheader.png"
+          alt="JZ Development"
+          class="h-10 w-auto"
+        />
+      </a>
+      <button
+        id="mobile-menu-close"
+        class="p-2 text-gray-500 hover:text-[var(--primary)] hover:bg-gray-100 rounded-lg transition-colors"
+        aria-label="Close menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Drawer Content -->
+    <div class="flex flex-col h-[calc(100%-72px)] overflow-y-auto">
+      <!-- Navigation Links -->
+      <nav class="flex-1 px-4 py-6">
+        <ul class="flex flex-col gap-1">
+          {navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class={`flex items-center py-3 px-4 font-medium text-lg transition-all rounded-lg hover:bg-[var(--primary)]/10 hover:text-[var(--primary)] ${
+                  currentPath === link.href
+                    ? 'text-[var(--primary)] bg-[var(--primary)]/10 border-l-4 border-[var(--primary)]'
+                    : 'text-[var(--charcoal)]'
+                }`}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <!-- CTA Buttons at Bottom -->
+      <div class="p-4 border-t border-gray-100 bg-gray-50">
+        <a href="/contact#quote-form-container" class="btn btn-secondary w-full text-center justify-center mb-3">
           Get Free Quote
         </a>
-        <a href="tel:+16316059851" class="btn btn-primary w-full text-center justify-center">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-          </svg>
-          (631) 605-9851
-        </a>
+        <div class="grid grid-cols-2 gap-3">
+          <a href="tel:+16316059851" class="btn btn-primary w-full text-center justify-center">
+            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            Call
+          </a>
+          <a id="header-sms-link" href="sms:+16316059851" class="btn bg-white border-2 border-[var(--primary)] text-[var(--primary)] w-full text-center justify-center font-bold">
+            <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd" />
+            </svg>
+            Text Us
+          </a>
+        </div>
       </div>
     </div>
   </div>
-
-  <!-- Mobile menu backdrop -->
-  <div
-    id="mobile-menu-backdrop"
-    class="fixed inset-0 bg-black/50 z-[-1] hidden lg:hidden"
-    aria-hidden="true"
-  ></div>
 </header>
 
 <script>
   const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenuCloseBtn = document.getElementById('mobile-menu-close');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
   const menuIconOpen = document.getElementById('menu-icon-open');
@@ -150,9 +185,16 @@ const currentPath = Astro.url.pathname;
   function closeMenu() {
     if (mobileMenuButton && mobileMenu && menuIconOpen && menuIconClose && mobileMenuBackdrop) {
       mobileMenuButton.setAttribute('aria-expanded', 'false');
-      mobileMenu.classList.add('hidden');
+      // Slide out drawer
+      mobileMenu.classList.add('-translate-x-full');
       mobileMenu.setAttribute('aria-hidden', 'true');
-      mobileMenuBackdrop.classList.add('hidden');
+      // Fade out backdrop
+      mobileMenuBackdrop.classList.remove('bg-black/50');
+      mobileMenuBackdrop.classList.add('bg-black/0');
+      // Hide backdrop after transition
+      setTimeout(() => {
+        mobileMenuBackdrop.classList.add('hidden');
+      }, 300);
       menuIconOpen.classList.remove('hidden');
       menuIconClose.classList.add('hidden');
       document.body.style.overflow = '';
@@ -162,9 +204,16 @@ const currentPath = Astro.url.pathname;
   function openMenu() {
     if (mobileMenuButton && mobileMenu && menuIconOpen && menuIconClose && mobileMenuBackdrop) {
       mobileMenuButton.setAttribute('aria-expanded', 'true');
-      mobileMenu.classList.remove('hidden');
-      mobileMenu.setAttribute('aria-hidden', 'false');
+      // Show backdrop first
       mobileMenuBackdrop.classList.remove('hidden');
+      // Trigger reflow to enable transition
+      mobileMenuBackdrop.offsetHeight;
+      // Fade in backdrop
+      mobileMenuBackdrop.classList.remove('bg-black/0');
+      mobileMenuBackdrop.classList.add('bg-black/50');
+      // Slide in drawer
+      mobileMenu.classList.remove('-translate-x-full');
+      mobileMenu.setAttribute('aria-hidden', 'false');
       menuIconOpen.classList.add('hidden');
       menuIconClose.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
@@ -172,6 +221,7 @@ const currentPath = Astro.url.pathname;
   }
 
   if (mobileMenuButton && mobileMenu && menuIconOpen && menuIconClose) {
+    // Toggle menu on hamburger click
     mobileMenuButton.addEventListener('click', () => {
       const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
       if (isExpanded) {
@@ -180,6 +230,11 @@ const currentPath = Astro.url.pathname;
         openMenu();
       }
     });
+
+    // Close button inside drawer
+    if (mobileMenuCloseBtn) {
+      mobileMenuCloseBtn.addEventListener('click', closeMenu);
+    }
 
     // Close menu when clicking on a link
     const mobileLinks = mobileMenu.querySelectorAll('a');
@@ -213,4 +268,13 @@ const currentPath = Astro.url.pathname;
     }
     lastScrollY = scrollY;
   }, { passive: true });
+
+  // Set SMS link with pre-filled message based on device
+  const headerSmsLink = document.getElementById('header-sms-link');
+  if (headerSmsLink) {
+    const message = "Hi! I'd like to get an estimate for a project.";
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const separator = isIOS ? '&' : '?';
+    headerSmsLink.href = `sms:+16316059851${separator}body=${encodeURIComponent(message)}`;
+  }
 </script>

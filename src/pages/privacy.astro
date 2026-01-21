@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+
+const lastUpdated = "January 2026";
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="Privacy Policy for JZ Development & Management LLC. Learn how we collect, use, and protect your personal information."
+>
+  <Header slot="header" />
+
+  <!-- Hero -->
+  <Hero
+    variant="page"
+    title="Privacy Policy"
+    subtitle="How we collect, use, and protect your information"
+    showCTAs={false}
+  />
+
+  <!-- Content -->
+  <section class="section bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto prose prose-lg">
+        <p class="text-gray-500 text-sm mb-8">Last Updated: {lastUpdated}</p>
+
+        <p class="text-gray-600 mb-6">
+          JZ Development & Management LLC ("we," "our," or "us") respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website or use our services.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">Information We Collect</h2>
+        <p class="text-gray-600 mb-4">We collect information you provide directly to us, including:</p>
+        <ul class="list-disc list-inside text-gray-600 mb-6 space-y-2">
+          <li>Name and contact information (phone number, email address)</li>
+          <li>Property address and location</li>
+          <li>Project details and descriptions</li>
+          <li>Budget information</li>
+          <li>Photos or documents you upload related to your project</li>
+          <li>Any other information you choose to provide</li>
+        </ul>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">How We Use Your Information</h2>
+        <p class="text-gray-600 mb-4">We use the information we collect to:</p>
+        <ul class="list-disc list-inside text-gray-600 mb-6 space-y-2">
+          <li>Respond to your inquiries and quote requests</li>
+          <li>Provide estimates and consultations for your projects</li>
+          <li>Communicate with you about our services</li>
+          <li>Schedule appointments and site visits</li>
+          <li>Improve our website and services</li>
+          <li>Comply with legal obligations</li>
+        </ul>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">Information Sharing</h2>
+        <p class="text-gray-600 mb-6">
+          We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:
+        </p>
+        <ul class="list-disc list-inside text-gray-600 mb-6 space-y-2">
+          <li>With your consent</li>
+          <li>With trusted service providers who assist us in operating our business (such as email services)</li>
+          <li>To comply with legal requirements or respond to lawful requests</li>
+          <li>To protect our rights, privacy, safety, or property</li>
+        </ul>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">Data Security</h2>
+        <p class="text-gray-600 mb-6">
+          We implement reasonable security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">Your Rights</h2>
+        <p class="text-gray-600 mb-4">You have the right to:</p>
+        <ul class="list-disc list-inside text-gray-600 mb-6 space-y-2">
+          <li>Request access to the personal information we hold about you</li>
+          <li>Request correction of inaccurate information</li>
+          <li>Request deletion of your personal information</li>
+          <li>Opt out of marketing communications</li>
+        </ul>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">Cookies and Tracking</h2>
+        <p class="text-gray-600 mb-6">
+          Our website may use cookies and similar tracking technologies to improve your browsing experience. You can control cookie settings through your browser preferences.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">Third-Party Links</h2>
+        <p class="text-gray-600 mb-6">
+          Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of these external sites. We encourage you to review the privacy policies of any third-party sites you visit.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">Updates to This Policy</h2>
+        <p class="text-gray-600 mb-6">
+          We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">Contact Us</h2>
+        <p class="text-gray-600 mb-4">
+          If you have any questions about this Privacy Policy or our privacy practices, please contact us:
+        </p>
+        <div class="bg-[var(--light-gray)] rounded-lg p-6 mb-6">
+          <p class="text-gray-600 mb-2"><strong>JZ Development & Management LLC</strong></p>
+          <p class="text-gray-600 mb-2">Phone: <a href="tel:+16316059851" class="text-[var(--primary)] hover:underline">(631) 605-9851</a></p>
+          <p class="text-gray-600">Email: <a href="mailto:JZamboliDevelopment@gmail.com" class="text-[var(--primary)] hover:underline">JZamboliDevelopment@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

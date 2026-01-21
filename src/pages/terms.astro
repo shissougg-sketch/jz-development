@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+
+const lastUpdated = "January 2026";
+---
+
+<BaseLayout
+  title="Terms of Service"
+  description="Terms of Service for JZ Development & Management LLC. Read our terms and conditions for using our website and services."
+>
+  <Header slot="header" />
+
+  <!-- Hero -->
+  <Hero
+    variant="page"
+    title="Terms of Service"
+    subtitle="Terms and conditions for using our website and services"
+    showCTAs={false}
+  />
+
+  <!-- Content -->
+  <section class="section bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto prose prose-lg">
+        <p class="text-gray-500 text-sm mb-8">Last Updated: {lastUpdated}</p>
+
+        <p class="text-gray-600 mb-6">
+          Welcome to JZ Development & Management LLC. By accessing or using our website and services, you agree to be bound by these Terms of Service. Please read them carefully.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">1. Acceptance of Terms</h2>
+        <p class="text-gray-600 mb-6">
+          By accessing this website or requesting our services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website or services.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">2. Services Description</h2>
+        <p class="text-gray-600 mb-4">
+          JZ Development & Management LLC provides general contracting services including but not limited to:
+        </p>
+        <ul class="list-disc list-inside text-gray-600 mb-6 space-y-2">
+          <li>Full home renovations</li>
+          <li>Kitchen and bathroom remodeling</li>
+          <li>Masonry and stonework</li>
+          <li>Concrete and foundation work</li>
+          <li>Epoxy flooring installation</li>
+          <li>New construction</li>
+          <li>Property maintenance and repairs</li>
+        </ul>
+        <p class="text-gray-600 mb-6">
+          All services are subject to availability and may vary based on project scope, location, and other factors.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">3. Estimates and Quotes</h2>
+        <p class="text-gray-600 mb-6">
+          Estimates and quotes provided through our website or in person are for informational purposes only and do not constitute a binding contract. Final pricing will be determined after a thorough assessment of your project and will be documented in a written agreement before work begins.
+        </p>
+        <p class="text-gray-600 mb-6">
+          Quotes are valid for 30 days from the date of issue unless otherwise specified. Prices may change based on material costs, project scope changes, or unforeseen conditions.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">4. User Responsibilities</h2>
+        <p class="text-gray-600 mb-4">When using our website or services, you agree to:</p>
+        <ul class="list-disc list-inside text-gray-600 mb-6 space-y-2">
+          <li>Provide accurate and complete information in all communications</li>
+          <li>Not use our website for any unlawful purpose</li>
+          <li>Not attempt to interfere with the proper functioning of our website</li>
+          <li>Comply with all applicable local, state, and federal laws</li>
+        </ul>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">5. Intellectual Property</h2>
+        <p class="text-gray-600 mb-6">
+          All content on this website, including text, images, logos, and design elements, is the property of JZ Development & Management LLC and is protected by copyright and other intellectual property laws. You may not reproduce, distribute, or create derivative works from this content without our express written permission.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">6. Limitation of Liability</h2>
+        <p class="text-gray-600 mb-6">
+          To the fullest extent permitted by law, JZ Development & Management LLC shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or relating to your use of our website or services. Our total liability shall not exceed the amount paid by you for services rendered.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">7. Disclaimer of Warranties</h2>
+        <p class="text-gray-600 mb-6">
+          Our website is provided "as is" without any warranties, express or implied. We do not warrant that the website will be uninterrupted, error-free, or free of viruses or other harmful components. Construction services are provided according to the terms specified in individual project contracts.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">8. Indemnification</h2>
+        <p class="text-gray-600 mb-6">
+          You agree to indemnify and hold harmless JZ Development & Management LLC, its officers, employees, and agents from any claims, damages, losses, or expenses arising out of your violation of these Terms of Service or your use of our website.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">9. Governing Law</h2>
+        <p class="text-gray-600 mb-6">
+          These Terms of Service shall be governed by and construed in accordance with the laws of the State of New York, without regard to its conflict of law provisions. Any disputes arising under these terms shall be subject to the exclusive jurisdiction of the courts of New York.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">10. Changes to Terms</h2>
+        <p class="text-gray-600 mb-6">
+          We reserve the right to modify these Terms of Service at any time. Changes will be effective immediately upon posting to this website. Your continued use of our website after any changes constitutes acceptance of the new terms.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">11. Severability</h2>
+        <p class="text-gray-600 mb-6">
+          If any provision of these Terms of Service is found to be invalid or unenforceable, the remaining provisions shall continue in full force and effect.
+        </p>
+
+        <h2 class="text-xl font-bold text-[var(--charcoal)] mt-8 mb-4">12. Contact Information</h2>
+        <p class="text-gray-600 mb-4">
+          If you have any questions about these Terms of Service, please contact us:
+        </p>
+        <div class="bg-[var(--light-gray)] rounded-lg p-6 mb-6">
+          <p class="text-gray-600 mb-2"><strong>JZ Development & Management LLC</strong></p>
+          <p class="text-gray-600 mb-2">Phone: <a href="tel:+16316059851" class="text-[var(--primary)] hover:underline">(631) 605-9851</a></p>
+          <p class="text-gray-600">Email: <a href="mailto:JZamboliDevelopment@gmail.com" class="text-[var(--primary)] hover:underline">JZamboliDevelopment@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
