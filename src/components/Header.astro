@@ -86,7 +86,7 @@ const currentPath = Astro.url.pathname;
         </a>
 
         <!-- CTA Button -->
-        <a href="/contact#quote-form-container" class="btn btn-secondary">
+        <a id="header-quote-btn" href="/contact#quote-form-container" class="btn btn-secondary">
           Free Quote
         </a>
       </div>
@@ -292,4 +292,17 @@ const currentPath = Astro.url.pathname;
     lastScrollY = scrollY;
   }, { passive: true });
 
+  // Handle quote button click - force scroll if already on contact page
+  const headerQuoteBtn = document.getElementById('header-quote-btn');
+  if (headerQuoteBtn) {
+    headerQuoteBtn.addEventListener('click', (e) => {
+      if (window.location.pathname === '/contact' || window.location.pathname === '/contact/') {
+        e.preventDefault();
+        const formContainer = document.getElementById('quote-form-container');
+        if (formContainer) {
+          formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  }
 </script>
