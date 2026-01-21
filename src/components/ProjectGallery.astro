@@ -44,7 +44,7 @@ const thumbnailImages = hasBeforeAfter ? duringImages : duringImages.slice(1);
           <img
             src={duringImages[0]}
             alt={title}
-            class="main-img w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            class="main-img w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
             loading="lazy"
           />
         ) : (
@@ -68,7 +68,7 @@ const thumbnailImages = hasBeforeAfter ? duringImages : duringImages.slice(1);
             <img
               src={img}
               alt={`${title} - Progress ${i + 1}`}
-              class="w-full h-full object-cover"
+              class="w-full h-full object-cover object-center"
               loading="lazy"
             />
           </button>
@@ -123,7 +123,7 @@ const thumbnailImages = hasBeforeAfter ? duringImages : duringImages.slice(1);
             tempImageEl = document.createElement('div');
             tempImageEl.className = 'temp-image aspect-[4/3] rounded-xl overflow-hidden bg-gray-100 relative';
             tempImageEl.innerHTML = `
-              <img src="${thumbImg.src}" alt="Progress" class="w-full h-full object-cover" />
+              <img src="${thumbImg.src}" alt="Progress" class="w-full h-full object-cover object-center" />
               <button class="back-to-slider absolute top-3 right-3 px-3 py-1.5 bg-black/70 text-white text-xs font-medium rounded-full hover:bg-black/90 transition-colors">
                 ← Back to Before/After
               </button>

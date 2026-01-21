@@ -14,7 +14,7 @@ const { beforeImage, afterImage, title, class: className = '' } = Astro.props;
   <img
     src={afterImage}
     alt={title ? `${title} - After` : 'After'}
-    class="w-full h-full object-cover"
+    class="w-full h-full object-cover object-center"
     loading="lazy"
   />
 
@@ -23,7 +23,7 @@ const { beforeImage, afterImage, title, class: className = '' } = Astro.props;
     <img
       src={beforeImage}
       alt={title ? `${title} - Before` : 'Before'}
-      class="w-full h-full object-cover"
+      class="w-full h-full object-cover object-center"
       loading="lazy"
     />
   </div>

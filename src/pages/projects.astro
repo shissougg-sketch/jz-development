@@ -23,7 +23,8 @@ const categories = [
   { id: 'masonry', label: 'Masonry' },
   { id: 'concrete', label: 'Concrete' },
   { id: 'epoxy', label: 'Epoxy' },
-  { id: 'new-construction', label: 'New Construction' }
+  { id: 'new-construction', label: 'New Construction' },
+  { id: 'renovations', label: 'Renovations' }
 ];
 
 const projects: Project[] = [
@@ -121,12 +122,12 @@ const projects: Project[] = [
   // Masonry
   {
     id: 11,
-    title: "Stoop Renovation",
+    title: "Brick Stoop Renovation",
     category: "masonry",
     tags: ["masonry", "exterior"],
-    beforeImage: "/images/projects/masonry/stoop-before-01-01.webp",
-    afterImage: "/images/projects/masonry/stoop-after-01-03.webp",
-    duringImages: ["/images/projects/masonry/stoop-01-02.webp"]
+    beforeImage: "/images/projects/masonry/brickstoop-before-01-01.webp",
+    afterImage: "/images/projects/masonry/brickstoop-after-01-03.webp",
+    duringImages: ["/images/projects/masonry/brickstoop-01-02.webp"]
   },
   // New Construction
   {
@@ -137,6 +138,316 @@ const projects: Project[] = [
     beforeImage: "/images/projects/new-construction/new-before-01-01.webp",
     afterImage: "/images/projects/new-construction/new-after-01-03.webp",
     duringImages: ["/images/projects/new-construction/new-01-02.webp"]
+  },
+  // Concrete - New Projects (by Job Number)
+  // Job 06
+  {
+    id: 13,
+    title: "Foundation Footing",
+    category: "concrete",
+    tags: ["concrete", "new-construction", "exterior"],
+    beforeImage: "/images/projects/concrete/footing-before-06-01.webp",
+    afterImage: "/images/projects/concrete/footing-after-06-02.webp"
+  },
+  // Job 07
+  {
+    id: 14,
+    title: "Bay Window Foundation",
+    category: "concrete",
+    tags: ["concrete", "exterior", "new-construction"],
+    beforeImage: "/images/projects/concrete/baywindowfoundation-before-07-01.webp",
+    afterImage: "/images/projects/concrete/baywindowfoundation-after-07-02.webp"
+  },
+  // Job 08
+  {
+    id: 15,
+    title: "Foundation Extension",
+    category: "concrete",
+    tags: ["concrete", "new-construction", "exterior"],
+    beforeImage: "/images/projects/concrete/foundationextention-before-08-01.webp",
+    afterImage: "/images/projects/concrete/foundationextention-after-08-03.webp",
+    duringImages: ["/images/projects/concrete/foundationextention-08-02.webp"]
+  },
+  // Job 09
+  {
+    id: 16,
+    title: "Foundation Extension",
+    category: "concrete",
+    tags: ["concrete", "new-construction", "exterior"],
+    beforeImage: "/images/projects/concrete/foundationextension-before-09-01.webp",
+    afterImage: "/images/projects/concrete/foundationextension-after-09-03.webp",
+    duringImages: ["/images/projects/concrete/foundationextension-09-02.webp"]
+  },
+  // Job 10
+  {
+    id: 17,
+    title: "Front House Foundation",
+    category: "concrete",
+    tags: ["concrete", "new-construction", "exterior"],
+    duringImages: ["/images/projects/concrete/fronthousefoundation-10-01.webp"]
+  },
+  // Job 11
+  {
+    id: 18,
+    title: "Foundation Footing",
+    category: "concrete",
+    tags: ["concrete", "new-construction", "exterior"],
+    duringImages: ["/images/projects/concrete/footing-11-01.webp"]
+  },
+  // Job 12
+  {
+    id: 19,
+    title: "Asphalt and Stone Wall Repair",
+    category: "concrete",
+    tags: ["concrete", "exterior", "masonry"],
+    beforeImage: "/images/projects/concrete/asphaltandstonewall-before-12-01.webp",
+    afterImage: "/images/projects/concrete/asphaltandstonewall-after-12-02.webp"
+  },
+  // Job 13
+  {
+    id: 20,
+    title: "Asphalt and Stone Wall Repair",
+    category: "concrete",
+    tags: ["concrete", "exterior", "masonry"],
+    beforeImage: "/images/projects/concrete/asphaltandstonewall-before-13-01.webp",
+    afterImage: "/images/projects/concrete/asphaltandstonewall-after-13-02.webp"
+  },
+  // Job 14
+  {
+    id: 21,
+    title: "Garage Floor Concrete",
+    category: "concrete",
+    tags: ["concrete", "interior"],
+    duringImages: ["/images/projects/concrete/garagefloor-14-01.webp"]
+  },
+  // Job 15
+  {
+    id: 22,
+    title: "Asphalt Pavers Driveway",
+    category: "concrete",
+    tags: ["concrete", "exterior", "masonry"],
+    duringImages: ["/images/projects/concrete/asphaltpaversdriveway-15-01.webp"]
+  },
+  // Job 16
+  {
+    id: 23,
+    title: "Asphalt Pavers Driveway",
+    category: "concrete",
+    tags: ["concrete", "exterior", "masonry"],
+    duringImages: ["/images/projects/concrete/asphaltpaversdriveway-16-01.webp"]
+  },
+  // Exteriors - New Projects (by Job Number)
+  // Job 02 (additional pool pavers photos)
+  {
+    id: 24,
+    title: "Pool Pavers",
+    category: "exteriors",
+    tags: ["exterior", "masonry", "concrete"],
+    duringImages: [
+      "/images/projects/exteriors/poolpavers-02-01.webp",
+      "/images/projects/exteriors/poolpavers-02-02.webp"
+    ]
+  },
+  // Job 03
+  {
+    id: 25,
+    title: "Pool Concrete",
+    category: "exteriors",
+    tags: ["exterior", "concrete"],
+    duringImages: ["/images/projects/exteriors/poolconcrete-03-01.webp"]
+  },
+  // Job 04
+  {
+    id: 26,
+    title: "Pool Pavers",
+    category: "exteriors",
+    tags: ["exterior", "masonry", "concrete"],
+    duringImages: ["/images/projects/exteriors/poolpavers-04-01.webp"]
+  },
+  // Job 05
+  {
+    id: 27,
+    title: "Pool Pavers",
+    category: "exteriors",
+    tags: ["exterior", "masonry", "concrete"],
+    beforeImage: "/images/projects/exteriors/poolpavers-before-05-01.webp",
+    afterImage: "/images/projects/exteriors/poolpavers-after-05-03.webp",
+    duringImages: ["/images/projects/exteriors/poolpavers-05-02.webp"]
+  },
+  // Job 06
+  {
+    id: 28,
+    title: "Pool Foundation",
+    category: "exteriors",
+    tags: ["exterior", "concrete", "new-construction"],
+    beforeImage: "/images/projects/exteriors/poolfoundation-before-06-01.webp",
+    afterImage: "/images/projects/exteriors/poolfoundation-after-06-03.webp",
+    duringImages: ["/images/projects/exteriors/poolfoundation-06-02.webp"]
+  },
+  // Job 07
+  {
+    id: 29,
+    title: "Pool Pavers",
+    category: "exteriors",
+    tags: ["exterior", "masonry", "concrete"],
+    beforeImage: "/images/projects/exteriors/poolpavers-before-07-01.webp",
+    afterImage: "/images/projects/exteriors/poolpavers-after-07-02.webp"
+  },
+  // Job 08
+  {
+    id: 30,
+    title: "Pool Pavers and Concrete Walkway",
+    category: "exteriors",
+    tags: ["exterior", "masonry", "concrete"],
+    duringImages: [
+      "/images/projects/exteriors/poolpavers-08-01.webp",
+      "/images/projects/exteriors/concretewalkway-08-01.webp"
+    ]
+  },
+  // Job 09
+  {
+    id: 31,
+    title: "Decorative Stone Feature",
+    category: "exteriors",
+    tags: ["exterior", "masonry"],
+    duringImages: ["/images/projects/exteriors/decorativestoneandrocksfeature-09-01.webp"]
+  },
+  // Job 11
+  {
+    id: 32,
+    title: "Stone Steps",
+    category: "exteriors",
+    tags: ["exterior", "masonry", "concrete"],
+    duringImages: ["/images/projects/exteriors/stonesteps-11-01.webp"]
+  },
+  // Masonry - New Projects (by Job Number)
+  // Job 02
+  {
+    id: 33,
+    title: "Paver Stoop",
+    category: "masonry",
+    tags: ["masonry", "exterior", "concrete"],
+    duringImages: ["/images/projects/masonry/paverstoop-02-01.webp"]
+  },
+  // Job 03
+  {
+    id: 34,
+    title: "Stone Patio",
+    category: "masonry",
+    tags: ["masonry", "exterior", "concrete"],
+    duringImages: ["/images/projects/masonry/stonepatio-03-01.webp"]
+  },
+  // Job 04
+  {
+    id: 35,
+    title: "Paver Stoop",
+    category: "masonry",
+    tags: ["masonry", "exterior", "concrete"],
+    duringImages: ["/images/projects/masonry/paverstoop-04-01.webp"]
+  },
+  // Job 05
+  {
+    id: 36,
+    title: "Paver Patio and Stoop",
+    category: "masonry",
+    tags: ["masonry", "exterior", "concrete"],
+    duringImages: ["/images/projects/masonry/paverpatioandstoop-05-01.webp"]
+  },
+  // Job 06
+  {
+    id: 37,
+    title: "Stone Stoop",
+    category: "masonry",
+    tags: ["masonry", "exterior", "concrete"],
+    duringImages: ["/images/projects/masonry/stonestoop-06-01.webp"]
+  },
+  // Job 07
+  {
+    id: 38,
+    title: "Slate Stoop",
+    category: "masonry",
+    tags: ["masonry", "exterior"],
+    duringImages: ["/images/projects/masonry/slatestoop-07-01.webp"]
+  },
+  // Job 08
+  {
+    id: 39,
+    title: "Brick and Slate Stoop",
+    category: "masonry",
+    tags: ["masonry", "exterior"],
+    duringImages: ["/images/projects/masonry/brickandslatestoop-08-01.webp"]
+  },
+  // Job 09
+  {
+    id: 40,
+    title: "Stone Walkway and Stoop",
+    category: "masonry",
+    tags: ["masonry", "exterior", "concrete"],
+    duringImages: ["/images/projects/masonry/stonewalkwayandstoop-09-01.webp"]
+  },
+  // Job 10
+  {
+    id: 41,
+    title: "Slate Stoop Renovation",
+    category: "masonry",
+    tags: ["masonry", "exterior", "renovations"],
+    beforeImage: "/images/projects/masonry/slatestoop-before-10-01.webp",
+    afterImage: "/images/projects/masonry/slatestoop-after-10-02.webp"
+  },
+  // Job 11
+  {
+    id: 42,
+    title: "Cobblestone Edging",
+    category: "masonry",
+    tags: ["masonry", "exterior", "concrete"],
+    duringImages: ["/images/projects/masonry/cobblestoneedging-11-01.webp"]
+  },
+  // Job 12
+  {
+    id: 43,
+    title: "Concrete Stoop",
+    category: "masonry",
+    tags: ["masonry", "exterior", "concrete"],
+    duringImages: ["/images/projects/masonry/concretestoop-12-01.webp"]
+  },
+  // Job 13
+  {
+    id: 44,
+    title: "Paver Stoop",
+    category: "masonry",
+    tags: ["masonry", "exterior", "concrete"],
+    duringImages: ["/images/projects/masonry/paverstoop-13-01.webp"]
+  },
+  // Job 14
+  {
+    id: 45,
+    title: "Paver Staircase",
+    category: "masonry",
+    tags: ["masonry", "exterior", "concrete"],
+    duringImages: ["/images/projects/masonry/paverstaircase-14-01.webp"]
+  },
+  // Job 15
+  {
+    id: 46,
+    title: "Paver Staircase",
+    category: "masonry",
+    tags: ["masonry", "exterior", "concrete"],
+    duringImages: ["/images/projects/masonry/paverstaircase-15-01.webp"]
+  },
+  // Renovations - New Category
+  // Job 01
+  {
+    id: 47,
+    title: "Indoor Pool Renovation",
+    category: "renovations",
+    tags: ["renovations", "interior"],
+    beforeImage: "/images/projects/renovations/indoorpool-before-01-01.webp",
+    afterImage: "/images/projects/renovations/indoorpool-after-01-05.webp",
+    duringImages: [
+      "/images/projects/renovations/indoorpool-01-02.webp",
+      "/images/projects/renovations/indoorpool-01-03.webp",
+      "/images/projects/renovations/indoorpool-01-04.webp"
+    ]
   }
 ];
 ---
