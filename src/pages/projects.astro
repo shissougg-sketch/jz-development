@@ -4,38 +4,141 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import CTASection from '../components/CTASection.astro';
+import ProjectGallery from '../components/ProjectGallery.astro';
 
 interface Project {
   id: number;
   title: string;
   category: string;
   tags: string[];
+  beforeImage?: string;
+  afterImage?: string;
+  duringImages?: string[];
 }
 
 const categories = [
   { id: 'all', label: 'All Projects' },
   { id: 'exterior', label: 'Exterior' },
   { id: 'interior', label: 'Interior' },
-  { id: 'masonry', label: 'Masonry/Stone' },
-  { id: 'kitchens-baths', label: 'Kitchens/Baths' },
+  { id: 'masonry', label: 'Masonry' },
+  { id: 'concrete', label: 'Concrete' },
   { id: 'epoxy', label: 'Epoxy' },
   { id: 'new-construction', label: 'New Construction' }
 ];
 
-// Placeholder projects - will be replaced with real data
 const projects: Project[] = [
-  { id: 1, title: "Modern Kitchen Remodel", category: "kitchens-baths", tags: ["interior", "kitchens-baths"] },
-  { id: 2, title: "Stone Veneer Facade", category: "masonry", tags: ["exterior", "masonry"] },
-  { id: 3, title: "Garage Epoxy Floor", category: "epoxy", tags: ["interior", "epoxy"] },
-  { id: 4, title: "Full Home Renovation", category: "interior", tags: ["interior"] },
-  { id: 5, title: "Paver Patio Install", category: "masonry", tags: ["exterior", "masonry"] },
-  { id: 6, title: "Bathroom Remodel", category: "kitchens-baths", tags: ["interior", "kitchens-baths"] },
-  { id: 7, title: "New Construction Home", category: "new-construction", tags: ["exterior", "new-construction"] },
-  { id: 8, title: "Basement Finishing", category: "interior", tags: ["interior"] },
-  { id: 9, title: "Retaining Wall", category: "masonry", tags: ["exterior", "masonry"] },
-  { id: 10, title: "Commercial Epoxy", category: "epoxy", tags: ["interior", "epoxy"] },
-  { id: 11, title: "Deck Construction", category: "exterior", tags: ["exterior"] },
-  { id: 12, title: "Kitchen Addition", category: "kitchens-baths", tags: ["interior", "kitchens-baths", "new-construction"] }
+  // Basements
+  {
+    id: 1,
+    title: "Basement Renovation",
+    category: "basements",
+    tags: ["interior"],
+    beforeImage: "/images/projects/basements/basement-before-02-01.webp",
+    afterImage: "/images/projects/basements/basement-after-02-03.webp",
+    duringImages: ["/images/projects/basements/basement-02-02.webp"]
+  },
+  {
+    id: 2,
+    title: "Cellar Bilco Door",
+    category: "basements",
+    tags: ["interior", "exterior"],
+    duringImages: [
+      "/images/projects/basements/cellar-belco-01-01.webp",
+      "/images/projects/basements/cellar-belco-01-02.webp",
+      "/images/projects/basements/cellar-belco-01-03.webp"
+    ]
+  },
+  // Concrete
+  {
+    id: 3,
+    title: "Cellar Concrete Work",
+    category: "concrete",
+    tags: ["concrete", "interior"],
+    beforeImage: "/images/projects/concrete/cellar-before-01-01.webp",
+    afterImage: "/images/projects/concrete/cellar-after-01-03.webp",
+    duringImages: ["/images/projects/concrete/cellar-01-02.webp"]
+  },
+  {
+    id: 4,
+    title: "Asphalt Repair",
+    category: "concrete",
+    tags: ["concrete", "exterior"],
+    beforeImage: "/images/projects/concrete/asphalt-before-02-01.webp",
+    afterImage: "/images/projects/concrete/ashphalt-after-02-02.webp"
+  },
+  {
+    id: 5,
+    title: "Garage Floor",
+    category: "concrete",
+    tags: ["concrete", "interior"],
+    beforeImage: "/images/projects/concrete/garage-before-03-01.webp",
+    afterImage: "/images/projects/concrete/garage-after-03-03.webp",
+    duringImages: ["/images/projects/concrete/garage-03-02.webp"]
+  },
+  {
+    id: 6,
+    title: "Bollards Installation",
+    category: "concrete",
+    tags: ["concrete", "exterior"],
+    beforeImage: "/images/projects/concrete/ballards-before-04-01.webp",
+    afterImage: "/images/projects/concrete/ballards-after-04-03.webp",
+    duringImages: ["/images/projects/concrete/ballards-04-02.webp"]
+  },
+  {
+    id: 7,
+    title: "Extension Foundation",
+    category: "concrete",
+    tags: ["concrete", "new-construction"],
+    beforeImage: "/images/projects/concrete/extention-before-05-01.webp",
+    afterImage: "/images/projects/concrete/extention-after-05-02.webp"
+  },
+  // Epoxy
+  {
+    id: 8,
+    title: "Epoxy Floor Coating",
+    category: "epoxy",
+    tags: ["epoxy", "interior"],
+    beforeImage: "/images/projects/epoxy/epoxy-before-01-01.webp",
+    afterImage: "/images/projects/epoxy/epoxy-after-01-02.webp"
+  },
+  // Exteriors
+  {
+    id: 9,
+    title: "Fire Pit Installation",
+    category: "exteriors",
+    tags: ["exterior", "masonry"],
+    beforeImage: "/images/projects/exteriors/firepit-before-01-01.webp",
+    afterImage: "/images/projects/exteriors/firepit-after-01-02.webp"
+  },
+  {
+    id: 10,
+    title: "Pool Pavers",
+    category: "exteriors",
+    tags: ["exterior", "masonry"],
+    beforeImage: "/images/projects/exteriors/poolpavers-before-02-01.webp",
+    afterImage: "/images/projects/exteriors/poolpavers-after-02-03.webp",
+    duringImages: ["/images/projects/exteriors/poolpavers-02-02.webp"]
+  },
+  // Masonry
+  {
+    id: 11,
+    title: "Stoop Renovation",
+    category: "masonry",
+    tags: ["masonry", "exterior"],
+    beforeImage: "/images/projects/masonry/stoop-before-01-01.webp",
+    afterImage: "/images/projects/masonry/stoop-after-01-03.webp",
+    duringImages: ["/images/projects/masonry/stoop-01-02.webp"]
+  },
+  // New Construction
+  {
+    id: 12,
+    title: "New Construction",
+    category: "new-construction",
+    tags: ["new-construction", "exterior"],
+    beforeImage: "/images/projects/new-construction/new-before-01-01.webp",
+    afterImage: "/images/projects/new-construction/new-after-01-03.webp",
+    duringImages: ["/images/projects/new-construction/new-01-02.webp"]
+  }
 ];
 ---
 
@@ -68,36 +171,19 @@ const projects: Project[] = [
       </div>
 
       <!-- Projects Grid -->
-      <div id="projects-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project) => (
           <div
-            class="project-item group relative aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-[var(--medium-gray)] to-[var(--light-gray)] cursor-pointer"
+            class="project-item"
             data-categories={project.tags.join(',')}
           >
-            <!-- Placeholder Content -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-              <svg class="w-12 h-12 text-[var(--slate-blue)] opacity-30 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span class="text-xs text-gray-500">Photo Coming Soon</span>
-            </div>
-
-            <!-- Hover Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-[var(--charcoal)] via-[var(--charcoal)]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div class="absolute bottom-0 left-0 right-0 p-4">
-                <p class="text-white font-semibold text-sm md:text-base">{project.title}</p>
-                <p class="text-gray-300 text-xs capitalize">{project.category.replace('-', ' ')}</p>
-              </div>
-            </div>
-
-            <!-- Click indicator -->
-            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                </svg>
-              </div>
-            </div>
+            <ProjectGallery
+              title={project.title}
+              category={project.category}
+              beforeImage={project.beforeImage}
+              afterImage={project.afterImage}
+              duringImages={project.duringImages}
+            />
           </div>
         ))}
       </div>
@@ -113,15 +199,6 @@ const projects: Project[] = [
         </button>
       </div>
 
-      <!-- Coming Soon Note -->
-      <div class="text-center mt-10 p-6 bg-[var(--light-gray)] rounded-xl">
-        <p class="text-gray-600 mb-2">
-          <strong>Project photos coming soon!</strong>
-        </p>
-        <p class="text-sm text-gray-500">
-          We're currently gathering photos of our completed work. Check back soon to see our full portfolio, or contact us to discuss your project.
-        </p>
-      </div>
     </div>
   </section>
 

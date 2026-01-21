@@ -1,0 +1,113 @@
+---
+interface Props {
+  beforeImage: string;
+  afterImage: string;
+  title?: string;
+  class?: string;
+}
+
+const { beforeImage, afterImage, title, class: className = '' } = Astro.props;
+---
+
+<div class={`before-after-container relative overflow-hidden rounded-xl ${className}`}>
+  <!-- After Image (Background) -->
+  <img
+    src={afterImage}
+    alt={title ? `${title} - After` : 'After'}
+    class="w-full h-full object-cover"
+    loading="lazy"
+  />
+
+  <!-- Before Image (Clipped) - starts at 25% to show mostly "after" -->
+  <div class="before-wrapper absolute inset-0 overflow-hidden" style="clip-path: inset(0 75% 0 0);">
+    <img
+      src={beforeImage}
+      alt={title ? `${title} - Before` : 'Before'}
+      class="w-full h-full object-cover"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- Slider Handle - starts at 25% -->
+  <div class="slider-handle absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize" style="left: 25%;">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
+      <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Labels -->
+  <div class="absolute top-3 left-3 px-2 py-1 bg-black/60 text-white text-xs font-medium rounded">Before</div>
+  <div class="absolute top-3 right-3 px-2 py-1 bg-black/60 text-white text-xs font-medium rounded">After</div>
+</div>
+
+<style>
+  .before-after-container {
+    aspect-ratio: 4/3;
+    touch-action: pan-y;
+    user-select: none;
+  }
+
+  .slider-handle {
+    transform: translateX(-50%);
+  }
+</style>
+
+<script>
+  function initBeforeAfter(container: HTMLElement) {
+    const beforeWrapper = container.querySelector('.before-wrapper') as HTMLElement;
+    const sliderHandle = container.querySelector('.slider-handle') as HTMLElement;
+    if (!beforeWrapper || !sliderHandle) return;
+
+    let isDragging = false;
+
+    function updatePosition(clientX: number) {
+      const rect = container.getBoundingClientRect();
+      let x = clientX - rect.left;
+      x = Math.max(0, Math.min(x, rect.width));
+      const percent = (x / rect.width) * 100;
+
+      beforeWrapper.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+      sliderHandle.style.left = `${percent}%`;
+    }
+
+    function startDrag(e: MouseEvent | TouchEvent) {
+      isDragging = true;
+      container.classList.add('cursor-ew-resize');
+      e.preventDefault();
+    }
+
+    function endDrag() {
+      isDragging = false;
+      container.classList.remove('cursor-ew-resize');
+    }
+
+    function onMove(e: MouseEvent | TouchEvent) {
+      if (!isDragging) return;
+      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+      updatePosition(clientX);
+    }
+
+    // Mouse events
+    sliderHandle.addEventListener('mousedown', startDrag);
+    document.addEventListener('mouseup', endDrag);
+    document.addEventListener('mousemove', onMove);
+
+    // Touch events
+    sliderHandle.addEventListener('touchstart', startDrag, { passive: false });
+    document.addEventListener('touchend', endDrag);
+    document.addEventListener('touchmove', onMove, { passive: true });
+
+    // Click to jump
+    container.addEventListener('click', (e) => {
+      if (e.target === sliderHandle || sliderHandle.contains(e.target as Node)) return;
+      updatePosition(e.clientX);
+    });
+  }
+
+  // Initialize all before-after components
+  document.querySelectorAll('.before-after-container').forEach((el) => {
+    initBeforeAfter(el as HTMLElement);
+  });
+</script>

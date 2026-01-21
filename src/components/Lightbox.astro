@@ -1,0 +1,140 @@
+---
+// Lightbox component - renders a hidden modal that can be opened via JS
+---
+
+<!-- Lightbox Modal (hidden by default) -->
+<div id="lightbox" class="lightbox fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-sm">
+  <!-- Close button -->
+  <button id="lightbox-close" class="absolute top-4 right-4 z-10 p-2 text-white/80 hover:text-white transition-colors" aria-label="Close">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <!-- Navigation arrows -->
+  <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 text-white/80 hover:text-white bg-black/30 hover:bg-black/50 rounded-full transition-all" aria-label="Previous image">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+  <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 text-white/80 hover:text-white bg-black/30 hover:bg-black/50 rounded-full transition-all" aria-label="Next image">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+
+  <!-- Image container -->
+  <div class="flex items-center justify-center w-full h-full p-4 md:p-12">
+    <img id="lightbox-img" src="" alt="" class="max-w-full max-h-full object-contain" />
+  </div>
+
+  <!-- Image counter -->
+  <div id="lightbox-counter" class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/80 text-sm font-medium">
+    1 / 1
+  </div>
+</div>
+
+<style>
+  .lightbox {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .lightbox.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox img {
+    animation: lightbox-fade-in 0.2s ease;
+  }
+
+  @keyframes lightbox-fade-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+
+<script>
+  interface LightboxState {
+    images: string[];
+    currentIndex: number;
+  }
+
+  const state: LightboxState = {
+    images: [],
+    currentIndex: 0
+  };
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lightboxCounter = document.getElementById('lightbox-counter');
+  const closeBtn = document.getElementById('lightbox-close');
+  const prevBtn = document.getElementById('lightbox-prev');
+  const nextBtn = document.getElementById('lightbox-next');
+
+  function updateLightbox() {
+    if (!lightboxImg || !lightboxCounter) return;
+    lightboxImg.src = state.images[state.currentIndex];
+    lightboxCounter.textContent = `${state.currentIndex + 1} / ${state.images.length}`;
+
+    // Hide nav buttons if only one image
+    if (prevBtn && nextBtn) {
+      const showNav = state.images.length > 1;
+      prevBtn.style.display = showNav ? 'block' : 'none';
+      nextBtn.style.display = showNav ? 'block' : 'none';
+    }
+  }
+
+  function openLightbox(images: string[], startIndex: number = 0) {
+    state.images = images;
+    state.currentIndex = startIndex;
+    updateLightbox();
+    lightbox?.classList.remove('hidden');
+    setTimeout(() => lightbox?.classList.add('active'), 10);
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox?.classList.remove('active');
+    setTimeout(() => {
+      lightbox?.classList.add('hidden');
+      document.body.style.overflow = '';
+    }, 200);
+  }
+
+  function nextImage() {
+    state.currentIndex = (state.currentIndex + 1) % state.images.length;
+    updateLightbox();
+  }
+
+  function prevImage() {
+    state.currentIndex = (state.currentIndex - 1 + state.images.length) % state.images.length;
+    updateLightbox();
+  }
+
+  // Event listeners
+  closeBtn?.addEventListener('click', closeLightbox);
+  prevBtn?.addEventListener('click', prevImage);
+  nextBtn?.addEventListener('click', nextImage);
+
+  // Close on backdrop click
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox || (e.target as HTMLElement).closest('.flex')) {
+      const clickedOnImg = (e.target as HTMLElement).tagName === 'IMG';
+      if (!clickedOnImg) closeLightbox();
+    }
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox?.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+  });
+
+  // Expose globally for other components
+  (window as any).openLightbox = openLightbox;
+</script>

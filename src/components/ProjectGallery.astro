@@ -1,0 +1,169 @@
+---
+import BeforeAfter from './BeforeAfter.astro';
+
+interface Props {
+  title: string;
+  category: string;
+  beforeImage?: string;
+  afterImage?: string;
+  duringImages?: string[];
+  class?: string;
+}
+
+const { title, category, beforeImage, afterImage, duringImages = [], class: className = '' } = Astro.props;
+const hasBeforeAfter = beforeImage && afterImage;
+
+// Build array of all images for lightbox
+const allImages: string[] = [];
+if (beforeImage) allImages.push(beforeImage);
+if (duringImages.length) allImages.push(...duringImages);
+if (afterImage) allImages.push(afterImage);
+
+// For display: thumbnails are during images (or all if no before/after)
+const thumbnailImages = hasBeforeAfter ? duringImages : duringImages.slice(1);
+---
+
+<div class={`project-gallery ${className}`} data-images={JSON.stringify(duringImages)} data-has-slider={hasBeforeAfter ? 'true' : 'false'}>
+  <!-- Project Header -->
+  <div class="mb-3">
+    <h3 class="text-lg font-bold text-[var(--charcoal)]">{title}</h3>
+    <p class="text-sm text-gray-500 capitalize">{category.replace(/-/g, ' ')}</p>
+  </div>
+
+  <!-- Main Image Area -->
+  <div class="main-image-wrapper group relative">
+    {hasBeforeAfter ? (
+      <BeforeAfter
+        beforeImage={beforeImage}
+        afterImage={afterImage}
+        title={title}
+      />
+    ) : (
+      <div class="aspect-[4/3] rounded-xl overflow-hidden bg-gray-100">
+        {duringImages[0] ? (
+          <img
+            src={duringImages[0]}
+            alt={title}
+            class="main-img w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+          />
+        ) : (
+          <div class="w-full h-full flex items-center justify-center text-gray-400">
+            <span>Photo coming soon</span>
+          </div>
+        )}
+      </div>
+    )}
+
+    <!-- Thumbnail Strip Overlay (bottom left) -->
+    {/* For slider: show during images. For non-slider: show images after the first one */}
+    {(hasBeforeAfter ? duringImages : duringImages.slice(1)).length > 0 && (
+      <div class="thumbnail-strip absolute bottom-3 left-3 flex gap-1.5">
+        {(hasBeforeAfter ? duringImages : duringImages.slice(1)).slice(0, 3).map((img, i) => (
+          <button
+            class="thumbnail flex-shrink-0 w-12 h-12 rounded-md overflow-hidden border-2 border-white/80 shadow-md transition-all focus:outline-none hover:border-[var(--construction-orange)] focus:border-[var(--construction-orange)] cursor-pointer"
+            data-index={i}
+            aria-label={`View progress photo ${i + 1}`}
+          >
+            <img
+              src={img}
+              alt={`${title} - Progress ${i + 1}`}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </button>
+        ))}
+        {/* Photo count badge - only for non-slider galleries with multiple images */}
+        {!hasBeforeAfter && duringImages.length > 4 && (
+          <div class="view-all-btn flex-shrink-0 w-12 h-12 rounded-md bg-black/70 border-2 border-white/80 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:bg-black/90 transition-colors shadow-md">
+            <div class="text-center leading-tight">
+              <div class="text-sm font-bold">{duringImages.length}</div>
+              <div class="text-[8px] opacity-80">pics</div>
+            </div>
+          </div>
+        )}
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  /* Thumbnails are now overlaid, no scrollbar needed */
+</style>
+
+<script>
+  document.querySelectorAll('.project-gallery').forEach((gallery) => {
+    const hasSlider = gallery.getAttribute('data-has-slider') === 'true';
+    const mainWrapper = gallery.querySelector('.main-image-wrapper') as HTMLElement;
+    if (!mainWrapper) return;
+
+    if (hasSlider) {
+      // For slider galleries: clicking thumbnail shows that image, clicking again shows slider
+      const sliderEl = mainWrapper.querySelector('.before-after-container') as HTMLElement;
+      if (!sliderEl) return;
+
+      let tempImageEl: HTMLElement | null = null;
+
+      gallery.querySelectorAll('.thumbnail').forEach((thumb) => {
+        thumb.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const thumbImg = thumb.querySelector('img') as HTMLImageElement;
+          if (!thumbImg) return;
+
+          // If temp image exists, swap its src
+          if (tempImageEl) {
+            const img = tempImageEl.querySelector('img') as HTMLImageElement;
+            if (img) {
+              img.src = thumbImg.src;
+            }
+          } else {
+            // Hide slider, show temp image
+            sliderEl.style.display = 'none';
+
+            tempImageEl = document.createElement('div');
+            tempImageEl.className = 'temp-image aspect-[4/3] rounded-xl overflow-hidden bg-gray-100 relative';
+            tempImageEl.innerHTML = `
+              <img src="${thumbImg.src}" alt="Progress" class="w-full h-full object-cover" />
+              <button class="back-to-slider absolute top-3 right-3 px-3 py-1.5 bg-black/70 text-white text-xs font-medium rounded-full hover:bg-black/90 transition-colors">
+                ← Back to Before/After
+              </button>
+            `;
+            mainWrapper.insertBefore(tempImageEl, sliderEl);
+
+            // Back button click
+            tempImageEl.querySelector('.back-to-slider')?.addEventListener('click', (e) => {
+              e.stopPropagation();
+              tempImageEl?.remove();
+              tempImageEl = null;
+              sliderEl.style.display = '';
+            });
+          }
+        });
+      });
+    } else {
+      // For non-slider galleries: swap images
+      const mainImg = gallery.querySelector('.main-img') as HTMLImageElement;
+      if (!mainImg) return;
+
+      gallery.querySelectorAll('.thumbnail').forEach((thumb) => {
+        thumb.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const thumbImg = thumb.querySelector('img') as HTMLImageElement;
+          if (thumbImg && mainImg) {
+            // Swap the images
+            const tempSrc = mainImg.src;
+            mainImg.src = thumbImg.src;
+            thumbImg.src = tempSrc;
+
+            // Add a subtle fade effect
+            mainImg.style.opacity = '0';
+            setTimeout(() => {
+              mainImg.style.transition = 'opacity 0.2s ease';
+              mainImg.style.opacity = '1';
+            }, 10);
+          }
+        });
+      });
+    }
+  });
+</script>
