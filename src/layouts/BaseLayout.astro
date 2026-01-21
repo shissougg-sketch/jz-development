@@ -13,7 +13,7 @@ const {
   title,
   description,
   canonicalURL = Astro.url.href,
-  ogImage = '/images/og-default.jpg'
+  ogImage = '/images/og-default.webp'
 } = Astro.props;
 
 const siteTitle = "JZ Development & Management LLC";
@@ -164,7 +164,7 @@ const localBusinessSchema = {
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={`https://jzdevelopmentllc.com${ogImage}`} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content={siteTitle} />
 
@@ -173,7 +173,7 @@ const localBusinessSchema = {
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={fullTitle} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={ogImage} />
+    <meta property="twitter:image" content={`https://jzdevelopmentllc.com${ogImage}`} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
