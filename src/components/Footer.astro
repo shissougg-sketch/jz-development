@@ -22,13 +22,15 @@ const quickLinks = [
 
 const socialLinks = [
   {
-    href: 'https://www.facebook.com/JZDevelopmentLLC',
+    href: 'fb://page/JZDevelopmentLLC',
+    fallbackHref: 'https://www.facebook.com/JZDevelopmentLLC',
     label: 'Facebook',
     icon: 'facebook',
     comingSoon: false
   },
   {
-    href: 'https://www.instagram.com/jzdevelopment_and_management',
+    href: 'instagram://user?username=jzdevelopment_and_management',
+    fallbackHref: 'https://www.instagram.com/jzdevelopment_and_management',
     label: 'Instagram',
     icon: 'instagram',
     comingSoon: false
@@ -60,8 +62,11 @@ const socialLinks = [
         <div class="flex gap-3 justify-center md:justify-start">
           {socialLinks.map((social) => (
             <a
-              href={social.href}
-              class={`group relative w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 ${
+              href={social.fallbackHref}
+              data-app-link={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`social-link group relative w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 ${
                 social.comingSoon
                   ? 'bg-gray-700/50 cursor-default'
                   : 'bg-[var(--primary)] hover:bg-[var(--secondary)] hover:scale-110'
@@ -194,3 +199,31 @@ const socialLinks = [
     </div>
   </div>
 </footer>
+
+<script>
+  // Try to open native app on mobile, fall back to web URL
+  document.querySelectorAll('.social-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const appLink = link.getAttribute('data-app-link');
+      const webLink = link.getAttribute('href');
+
+      // Only attempt app deep link on mobile devices
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+      if (isMobile && appLink) {
+        e.preventDefault();
+
+        // Try to open the app
+        const start = Date.now();
+        window.location.href = appLink;
+
+        // If app doesn't open within 1.5s, redirect to web
+        setTimeout(() => {
+          if (Date.now() - start < 2000) {
+            window.open(webLink, '_blank');
+          }
+        }, 1500);
+      }
+    });
+  });
+</script>
